@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function requestData() {
+      return request.resource.data;
+    }
+    match /scenes/{sceneId} {
+      allow read;
+      allow create, update: if requestData().size() == 9
+                        && 'createdAt' in requestData() && requestData().createdAt is timestamp
+                        && 'likes' in requestData() && requestData().likes is number
+                        && 'screenshotURL' in requestData() && requestData().screenshotURL is string
+                        && 'shares' in requestData() && requestData().shares is number
+                        && 'tags' in requestData() && requestData().tags is list
+                        && 'title' in requestData() && requestData().title is string
+                        && 'updatedAt' in requestData() && requestData().updatedAt is timestamp
+                        && 'userId' in requestData()
+                        && 'videoName' in requestData() && requestData().videoName is string;
+    }
+
+    match /tags/{tagId} {
+      allow read;
+      allow create: if requestData().size() == 4
+                        && 'createdAt' in requestData() && requestData().createdAt is timestamp
+                        && 'label' in requestData() && requestData().label is string
+                        && 'scenesCount' in requestData() && requestData().scenesCount is number
+                        && 'updatedAt' in requestData() && requestData().updatedAt is timestamp;
+    }
+  }
+}
