@@ -5,7 +5,7 @@ const IndexPage = () => {
   return (
     <>
       <NextSeo
-        title="j"
+        title="彼氏がかわいすぎる.com"
         description="彼氏がかわいすぎる.com"
         nofollow={false}
         canonical={'http://xn--n8jnck8c3rya5127g0wxa.com/'}
