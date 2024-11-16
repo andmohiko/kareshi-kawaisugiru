@@ -1,27 +1,15 @@
-import { MantineProvider } from '@mantine/core'
-import { NotificationsProvider } from '@mantine/notifications'
-
 import type { AppProps } from 'next/app'
 
-import { HeadComponent } from '~/components/Head'
+import '~/styles/reset.css'
+import '~/styles/globals.css'
+import { Providers } from '~/providers'
 
-const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
+// eslint-disable-next-line @typescript-eslint/naming-convention
+function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <HeadComponent />
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{
-          /** Put your mantine theme override here */
-          colorScheme: 'light',
-        }}
-      >
-        <NotificationsProvider position="top-center">
-          <Component {...pageProps} />
-        </NotificationsProvider>
-      </MantineProvider>
-    </>
+    <Providers>
+      <Component {...pageProps} />
+    </Providers>
   )
 }
 

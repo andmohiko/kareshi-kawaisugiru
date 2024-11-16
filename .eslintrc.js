@@ -1,28 +1,18 @@
 module.exports = {
   root: true,
   env: {
+    es6: true,
     browser: true,
-    es2020: true,
+    node: true,
   },
-  extends: [
-    'next/core-web-vitals',
-    'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'prettier',
-  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2020,
+    ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'react', 'import'],
   settings: {
     'import/resolver': {
       node: {
@@ -30,49 +20,104 @@ module.exports = {
       },
       typescript: {
         config: 'tsconfig.json',
-        project: './frontend',
+        project: './apps/frontend',
         alwaysTryTypes: true,
       },
     },
   },
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'prettier',
+  ],
   rules: {
-    '@typescript-eslint/ban-types': [
-      'error',
+    'prefer-const': 'error',
+    'prefer-arrow-callback': 'error',
+    '@typescript-eslint/consistent-type-imports': [
+      'warn',
       {
-        types: {
-          '{}': false,
-        },
+        prefer: 'type-imports',
       },
     ],
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    'react/prop-types': ['off'],
-    'react/react-in-jsx-scope': 'off',
-    'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        varsIgnorePattern: '^_',
+        argsIgnorePattern: '^_',
+      },
+    ],
+    // 詳細: https://typescript-eslint.io/rules/consistent-type-definitions/
+    '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+    // 詳細: @typescript-eslint/naming-convention
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: 'variable',
+        format: ['strictCamelCase', 'StrictPascalCase', 'UPPER_CASE'],
+        leadingUnderscore: 'allow',
+      },
+      {
+        selector: 'parameter',
+        format: ['strictCamelCase'],
+      },
+      {
+        selector: 'class',
+        format: ['StrictPascalCase'],
+        custom: {
+          regex: 'send|start|find',
+          match: false,
+        },
+      },
+      {
+        selector: 'typeLike',
+        format: ['StrictPascalCase'],
+      },
+      {
+        selector: 'enumMember',
+        format: ['StrictPascalCase'],
+      },
+      // 変数名のprefixの規則
+      {
+        selector: 'variable',
+        types: ['boolean'],
+        // prefix以降がPascalCaseである必要がある。検証の解決順はprefix -> format
+        format: ['PascalCase'],
+        prefix: ['is', 'can', 'should', 'has', 'did', 'will'],
+      },
+    ],
+    // 詳細: https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/array-type.md
+    '@typescript-eslint/array-type': [
+      'error',
+      {
+        default: 'generic',
+      },
+    ],
     'import/order': [
       'error',
       {
-        groups: [
-          'builtin',
-          'external',
-          'parent',
-          'sibling',
-          'index',
-          'object',
-          'type',
-        ],
-        pathGroups: [
-          {
-            pattern: '{react,react-dom/**,react-router-dom}',
-            group: 'builtin',
-            position: 'before',
-          },
-        ],
-        pathGroupsExcludedImportTypes: ['builtin'],
-        alphabetize: {
-          order: 'asc',
-        },
         'newlines-between': 'always',
+        warnOnUnassignedImports: true,
       },
     ],
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: ['../'],
+      },
+    ],
+    // 詳細: https://eslint.org/docs/latest/rules/curly
+    curly: ['error', 'all'],
+    // 詳細: https://eslint.org/docs/latest/rules/object-shorthand
+    'object-shorthand': ['error', 'always'],
+    // 詳細: https://eslint.org/docs/latest/rules/no-nested-ternary
+    'no-nested-ternary': 'error',
+    // 詳細: https://eslint.org/docs/latest/rules/no-console
+    'no-console': ['error', { allow: ['warn', 'error'] }],
   },
 }
