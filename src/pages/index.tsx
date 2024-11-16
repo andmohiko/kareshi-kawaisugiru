@@ -8,15 +8,15 @@ const IndexPage = () => {
         title="彼氏がかわいすぎる.com"
         description="彼氏がかわいすぎる.com"
         nofollow={false}
-        canonical={'http://xn--n8jnck8c3rya5127g0wxa.com/'}
+        canonical={process.env.NEXT_PUBLIC_APP_URL}
         openGraph={{
           title: '彼氏がかわいすぎる.com',
           description: '彼氏がかわいすぎる.com',
-          url: 'http://xn--n8jnck8c3rya5127g0wxa.com/',
+          url: process.env.NEXT_PUBLIC_APP_URL,
           type: 'website',
           images: [
             {
-              url: '/images/ogp.png',
+              url: `${process.env.NEXT_PUBLIC_APP_URL}/images/ogp.png`,
               width: 800,
               height: 600,
               alt: '',
