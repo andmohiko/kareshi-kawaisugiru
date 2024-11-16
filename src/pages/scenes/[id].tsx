@@ -2,8 +2,6 @@ import { Stack, Anchor } from '@mantine/core'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
-import { NoPlusLayout } from '~/components/Layouts/NoPlusLayout'
-import { SceneDetailCard } from '~/components/SceneDetailCard'
 import { Scene } from '~/entities'
 
 type Props = {
@@ -11,7 +9,7 @@ type Props = {
 }
 
 const SceneDetailPage = ({ scene }: Props) => (
-  <NoPlusLayout>
+  <>
     <Head>
       <meta
         property="og:url"
@@ -33,10 +31,9 @@ const SceneDetailPage = ({ scene }: Props) => (
         textAlign: 'center',
       }}
     >
-      <SceneDetailCard scene={scene} />
       <Anchor href="/">一覧へ戻る</Anchor>
     </Stack>
-  </NoPlusLayout>
+  </>
 )
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
