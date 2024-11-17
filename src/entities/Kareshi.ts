@@ -4,6 +4,11 @@ import type { Uid } from '.'
 
 export const kareshiCollection = 'kareshis' as const
 
+export const dateColumns = [
+  'createdAt',
+  'updatedAt',
+] as const satisfies Array<string>
+
 export type KareshiId = Uid
 
 export type Kareshi = {

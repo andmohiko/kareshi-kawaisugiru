@@ -16,8 +16,13 @@ import {
 } from '~/features/kareshi/types'
 import { FileInputWithCropper } from '~/components/Inputs/FileInputWithCropper'
 import { useFirebaseAuthContext } from '~/providers/FirebaseAuthProvider'
+import { Kareshi } from '~/entities/Kareshi'
 
-export const EditKareshiForm = (): React.ReactNode => {
+type Props = {
+  kareshi: Kareshi | null
+}
+
+export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
   const { startLoading, stopLoading } = useLoadingContext()
   const { showErrorToast } = useToast()
   const { createKareshi } = useSaveKareshi()
@@ -30,10 +35,16 @@ export const EditKareshiForm = (): React.ReactNode => {
   } = useForm<EditKareshiInputType>({
     resolver: zodResolver(editKareshiSchema),
     defaultValues: {
-      landscapeImageUrl: undefined,
-      name: null,
-      portraitImageUrl: undefined,
-      squareImageUrl: undefined,
+      landscapeImageUrl: kareshi?.landscapeImageUrl
+        ? kareshi.landscapeImageUrl
+        : undefined,
+      name: kareshi ? kareshi.name : '',
+      portraitImageUrl: kareshi?.portraitImageUrl
+        ? kareshi.portraitImageUrl
+        : undefined,
+      squareImageUrl: kareshi?.squareImageUrl
+        ? kareshi.squareImageUrl
+        : undefined,
     },
   })
 
@@ -51,12 +62,6 @@ export const EditKareshiForm = (): React.ReactNode => {
   return (
     <form onSubmit={handleSubmit(submit)} className={styles.form}>
       <FlexBox gap={32}>
-        <TextInput
-          label="普段なんて呼んでる？"
-          w="100%"
-          {...register('name')}
-          error={errors.name?.message}
-        />
         <Controller
           name="landscapeImageUrl"
           control={control}
@@ -69,6 +74,12 @@ export const EditKareshiForm = (): React.ReactNode => {
               storagePath={uid ? `/images/users/${uid}` : `/images/noUid`}
             />
           )}
+        />
+        <TextInput
+          label="普段なんて呼んでる？"
+          w="100%"
+          {...register('name')}
+          error={errors.name?.message}
         />
       </FlexBox>
       <FlexBox gap={16} align="stretch">
