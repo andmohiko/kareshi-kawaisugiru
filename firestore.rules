@@ -21,12 +21,29 @@ service cloud.firestore {
       return request.auth.uid == userId;
     }
 
+    function isValidKareshiSchema(requestData) {
+      return requestData.size() == 6
+        && 'createdAt' in requestData && requestData.createdAt is timestamp
+        && 'landscapeImageUrl' in requestData && (requestData.landscapeImageUrl is string || requestData.landscapeImageUrl == null)
+        && 'name' in requestData && (requestData.name is string || requestData.name == null)
+        && 'portraitImageUrl' in requestData && (requestData.portraitImageUrl is string || requestData.portraitImageUrl == null)
+        && 'squareImageUrl' in requestData && (requestData.squareImageUrl is string || requestData.squareImageUrl == null)
+        && 'updatedAt' in requestData && requestData.updatedAt is timestamp;
+    }
+
     function isValidUserSchema(requestData) {
       return requestData.size() == 4
         && 'createdAt' in requestData && requestData.createdAt is timestamp
         && 'email' in requestData && requestData.email is string
         && 'name' in requestData && requestData.name == null
         && 'updatedAt' in requestData && requestData.updatedAt is timestamp;
+    }
+
+    match /kareshis/{kareshiId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && isUser(kareshiId) && isValidKareshiSchema(requestData());
+      allow update: if isSignedIn() && isUser(kareshiId) && isValidKareshiSchema(requestData());
+      allow delete: if isSignedIn() && isUser(kareshiId);
     }
 
     match /users/{userId} {
