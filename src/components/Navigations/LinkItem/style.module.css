@@ -1,0 +1,10 @@
+.linkItem {
+  display: flex;
+  gap: 2px;
+  color: var(--color-nav);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
