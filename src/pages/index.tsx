@@ -1,5 +1,5 @@
 import { NextSeo } from 'next-seo'
-import { TopContainer } from '~/features/Top/components/TopContainer'
+import { TopContainer } from '~/features/top/components/TopContainer'
 
 const IndexPage = () => {
   return (
