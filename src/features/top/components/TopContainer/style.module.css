@@ -1,8 +1,7 @@
 .container {
-  position: relative;
-  display: grid;
-  place-content: center;
-  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
 
   .title {
