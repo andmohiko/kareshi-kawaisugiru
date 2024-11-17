@@ -23,6 +23,7 @@ type Props = {
 }
 
 export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
+  console.log('kareshi', kareshi)
   const { startLoading, stopLoading } = useLoadingContext()
   const { showErrorToast } = useToast()
   const { createKareshi } = useSaveKareshi()
