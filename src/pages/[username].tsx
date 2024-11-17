@@ -1,8 +1,8 @@
-import { KareshiContainer } from '~/features/kareshi/components/KareshiContainer'
+import { NextSeo } from 'next-seo'
 
 import type { NextPage, GetStaticProps, GetStaticPaths } from 'next'
 import { z } from 'zod'
-
+import { KareshiContainer } from '~/features/kareshi/components/KareshiContainer'
 import { Kareshi } from '~/entities/Kareshi'
 
 type Props = {
@@ -10,7 +10,43 @@ type Props = {
 }
 
 const KareshiPage: NextPage<Props> = ({ kareshi }: Props) => {
-  return <KareshiContainer kareshi={kareshi} />
+  const title = kareshi.kareshiName
+    ? `${kareshi.kareshiName} | 彼氏がかわいすぎる.com`
+    : '彼氏がかわいすぎる.com'
+  const description = kareshi.kareshiName
+    ? `私の彼氏の${kareshi.kareshiName}です`
+    : 'うちの彼氏です。'
+  const ogpImageUrl =
+    kareshi.landscapeImageUrl ??
+    `${process.env.NEXT_PUBLIC_APP_URL}/images/ogp.png`
+  return (
+    <>
+      <NextSeo
+        title={title}
+        description={description}
+        nofollow={false}
+        canonical={process.env.NEXT_PUBLIC_APP_URL}
+        openGraph={{
+          title,
+          description,
+          url: process.env.NEXT_PUBLIC_APP_URL,
+          type: 'website',
+          images: [
+            {
+              url: ogpImageUrl,
+              width: 800,
+              height: 600,
+              alt: '',
+            },
+          ],
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+        }}
+      />
+      <KareshiContainer kareshi={kareshi} />
+    </>
+  )
 }
 
 export const getStaticProps: GetStaticProps<Props> = async (ctx) => {

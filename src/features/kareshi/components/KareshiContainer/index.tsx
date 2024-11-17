@@ -13,8 +13,11 @@ export const KareshiContainer = ({ kareshi }: Props): React.ReactNode => {
     <BaseLayout>
       <div className={styles.container}>
         <>
-          <TitleText>{kareshi.name}</TitleText>
-          <img src={kareshi.landscapeImageUrl ?? ''} alt={kareshi.name ?? ''} />
+          <TitleText>{kareshi.kareshiName}</TitleText>
+          <img
+            src={kareshi.landscapeImageUrl ?? ''}
+            alt={kareshi.kareshiName ?? ''}
+          />
         </>
       </div>
     </BaseLayout>
