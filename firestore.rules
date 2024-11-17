@@ -1,30 +1,37 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // 送られてきたリクエストのデータ
     function requestData() {
       return request.resource.data;
     }
-    match /scenes/{sceneId} {
-      allow read;
-      allow create, update: if requestData().size() == 9
-                        && 'createdAt' in requestData() && requestData().createdAt is timestamp
-                        && 'likes' in requestData() && requestData().likes is number
-                        && 'screenshotURL' in requestData() && requestData().screenshotURL is string
-                        && 'shares' in requestData() && requestData().shares is number
-                        && 'tags' in requestData() && requestData().tags is list
-                        && 'title' in requestData() && requestData().title is string
-                        && 'updatedAt' in requestData() && requestData().updatedAt is timestamp
-                        && 'userId' in requestData()
-                        && 'videoName' in requestData() && requestData().videoName is string;
+
+    // すでに保存されているデータ
+    function existingData() {
+      return resource.data;
     }
 
-    match /tags/{tagId} {
-      allow read;
-      allow create: if requestData().size() == 4
-                        && 'createdAt' in requestData() && requestData().createdAt is timestamp
-                        && 'label' in requestData() && requestData().label is string
-                        && 'scenesCount' in requestData() && requestData().scenesCount is number
-                        && 'updatedAt' in requestData() && requestData().updatedAt is timestamp;
+    // ログイン済かどうか
+    function isSignedIn() {
+      return request.auth.uid != null;
+    }
+
+    // ユーザーIDが一致するかどうか
+    function isUser(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function isValidUserSchema(requestData) {
+      return requestData.size() == 4
+        && 'createdAt' in requestData && requestData.createdAt is timestamp
+        && 'email' in requestData && requestData.email is string
+        && 'name' in requestData && requestData.name == null
+        && 'updatedAt' in requestData && requestData.updatedAt is timestamp;
+    }
+
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && isUser(userId) && isValidUserSchema(requestData());
     }
   }
 }
