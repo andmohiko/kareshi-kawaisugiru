@@ -23,7 +23,6 @@ type Props = {
 }
 
 export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
-  console.log('kareshi', kareshi)
   const { startLoading, stopLoading } = useLoadingContext()
   const { showErrorToast } = useToast()
   const { createKareshi } = useSaveKareshi()
@@ -36,16 +35,17 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
   } = useForm<EditKareshiInputType>({
     resolver: zodResolver(editKareshiSchema),
     defaultValues: {
+      kareshiName: kareshi?.kareshiName ? kareshi.kareshiName : null,
       landscapeImageUrl: kareshi?.landscapeImageUrl
         ? kareshi.landscapeImageUrl
         : undefined,
-      name: kareshi ? kareshi.name : '',
       portraitImageUrl: kareshi?.portraitImageUrl
         ? kareshi.portraitImageUrl
         : undefined,
       squareImageUrl: kareshi?.squareImageUrl
         ? kareshi.squareImageUrl
         : undefined,
+      username: kareshi?.username ? kareshi.username : null,
     },
   })
 
@@ -63,6 +63,13 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
   return (
     <form onSubmit={handleSubmit(submit)} className={styles.form}>
       <FlexBox gap={32}>
+        {/* ユニーク制約を入れる */}
+        <TextInput
+          label="彼氏ID(URLに使われるよ)"
+          w="100%"
+          {...register('username')}
+          error={errors.username?.message}
+        />
         <Controller
           name="landscapeImageUrl"
           control={control}
@@ -79,8 +86,8 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
         <TextInput
           label="普段なんて呼んでる？"
           w="100%"
-          {...register('name')}
-          error={errors.name?.message}
+          {...register('kareshiName')}
+          error={errors.kareshiName?.message}
         />
       </FlexBox>
       <FlexBox gap={16} align="stretch">

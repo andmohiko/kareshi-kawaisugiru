@@ -22,13 +22,14 @@ service cloud.firestore {
     }
 
     function isValidKareshiSchema(requestData) {
-      return requestData.size() == 6
+      return requestData.size() == 7
         && 'createdAt' in requestData && requestData.createdAt is timestamp
+        && 'kareshiName' in requestData && (requestData.kareshiName is string || requestData.kareshiName == null)
         && 'landscapeImageUrl' in requestData && (requestData.landscapeImageUrl is string || requestData.landscapeImageUrl == null)
-        && 'name' in requestData && (requestData.name is string || requestData.name == null)
         && 'portraitImageUrl' in requestData && (requestData.portraitImageUrl is string || requestData.portraitImageUrl == null)
         && 'squareImageUrl' in requestData && (requestData.squareImageUrl is string || requestData.squareImageUrl == null)
-        && 'updatedAt' in requestData && requestData.updatedAt is timestamp;
+        && 'updatedAt' in requestData && requestData.updatedAt is timestamp
+        && 'username' in requestData && (requestData.username is string || requestData.username == null);
     }
 
     function isValidUserSchema(requestData) {

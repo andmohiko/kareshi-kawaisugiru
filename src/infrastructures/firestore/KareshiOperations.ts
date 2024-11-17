@@ -11,11 +11,11 @@ import { convertDate } from '~/utils/convertDate'
 
 export const fetchKareshiByIdOperation = async (
   kareshiId: KareshiId,
-): Promise<Kareshi> => {
+): Promise<Kareshi | null> => {
   const snapshot = await getDoc(doc(db, kareshiCollection, kareshiId))
   const data = snapshot.data()
   if (!snapshot.exists() || !data) {
-    throw new Error(`Kareshi ${kareshiId} not found`)
+    return null
   }
   return {
     kareshiId: snapshot.id,

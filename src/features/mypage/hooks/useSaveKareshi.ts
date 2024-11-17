@@ -15,11 +15,12 @@ export const useSaveKareshi = (): {
 
     await createKareshiOperation(uid, {
       createdAt: serverTimestamp,
+      kareshiName: data.kareshiName,
       landscapeImageUrl: data.landscapeImageUrl ?? null,
-      name: data.name,
       portraitImageUrl: data.portraitImageUrl ?? null,
       squareImageUrl: data.squareImageUrl ?? null,
       updatedAt: serverTimestamp,
+      username: data.username,
     })
   }
 

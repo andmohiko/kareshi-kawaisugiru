@@ -14,11 +14,12 @@ export type KareshiId = Uid
 export type Kareshi = {
   kareshiId: KareshiId
   createdAt: Date
+  kareshiName: string | null
   landscapeImageUrl: string | null
-  name: string | null
   portraitImageUrl: string | null
   squareImageUrl: string | null
   updatedAt: Date
+  username: string | null
 }
 
 export type CreateKareshiDto = Omit<
