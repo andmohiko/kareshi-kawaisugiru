@@ -23,4 +23,5 @@ auth.languageCode = 'ja'
 export const db = getFirestore()
 export const serverTimestamp = getServerTimestamp()
 export const storage = getStorage()
-export const analytics = getAnalytics()
+// window オブジェクトがあるときだけ getAnalytics() を呼び出す
+export const analytics = typeof window !== 'undefined' ? getAnalytics() : null

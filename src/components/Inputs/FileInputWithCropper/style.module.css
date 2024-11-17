@@ -1,0 +1,41 @@
+.fileInputWithCropper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+
+  .title {
+    font-size: 14px;
+    line-height: 1;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  .dropzone {
+    width: 100%;
+    height: 200px;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .error {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #f5222d;
+  }
+
+  .imagePreview {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .image {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

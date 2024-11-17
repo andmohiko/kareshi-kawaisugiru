@@ -56,6 +56,9 @@ importers:
       react-icons:
         specifier: ^5.3.0
         version: 5.3.0(react@18.2.0)
+      react-image-crop:
+        specifier: ^11.0.7
+        version: 11.0.7(react@18.2.0)
       react-remove-scroll:
         specifier: ^2.6.0
         version: 2.6.0(@types/react@18.2.46)(react@18.2.0)
@@ -2036,6 +2039,11 @@ packages:
     resolution: {integrity: sha512-DnUk8aFbTyQPSkCfF8dbX6kQjXA9DktMeJqfjrg6cK9vwQVMxmcA3BfP4QoiztVmEHtwlTgLFsPuH2NskKT6eg==}
     peerDependencies:
       react: '*'
+
+  react-image-crop@11.0.7:
+    resolution: {integrity: sha512-ZciKWHDYzmm366JDL18CbrVyjnjH0ojufGDmScfS4ZUqLHg4nm6ATY+K62C75W4ZRNt4Ii+tX0bSjNk9LQ2xzQ==}
+    peerDependencies:
+      react: '>=16.13.1'
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -4888,6 +4896,10 @@ snapshots:
       react: 18.2.0
 
   react-icons@5.3.0(react@18.2.0):
+    dependencies:
+      react: 18.2.0
+
+  react-image-crop@11.0.7(react@18.2.0):
     dependencies:
       react: 18.2.0
 
