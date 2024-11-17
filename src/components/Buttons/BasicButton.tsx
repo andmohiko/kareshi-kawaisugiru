@@ -2,10 +2,8 @@ import { Button } from '@mantine/core'
 import Link from 'next/link'
 
 import type { ButtonImportance, ButtonSize } from '~/components/Buttons/types'
-import { getButtonVariant } from '~/components/Buttons/types'
+import { getButtonVariant, buttonColor } from '~/components/Buttons/types'
 import { isExternalLink } from '~/components/Navigations/LinkItem'
-
-const buttonColor = 'rgba(255, 97, 208, 1)'
 
 type Props = {
   children: React.ReactNode
