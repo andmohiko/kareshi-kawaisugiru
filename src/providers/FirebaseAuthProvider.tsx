@@ -6,7 +6,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 
 import { auth } from '~/lib/firebase'
 
-const authPaths = ['/mypage']
+const authPaths = ['/i/mypage']
 
 const FirebaseAuthContext = createContext<{
   uid: string | null
