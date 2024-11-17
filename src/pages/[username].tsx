@@ -17,7 +17,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
   const { params } = ctx
   const validationResult = z
     .object({
-      id: z.string(),
+      username: z.string(),
     })
     .safeParse(params)
 
@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
   }
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL}/api/kareshi/${validationResult.data.id}`,
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/kareshi/${validationResult.data.username}`,
   )
   const kareshi = await res.json()
 

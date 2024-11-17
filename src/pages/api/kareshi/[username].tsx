@@ -1,25 +1,26 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { createRouter } from 'next-connect'
-import { fetchKareshiByIdOperation } from '~/infrastructures/adminFirestore/KareshiOperations'
+import { fetchKareshiByUsernameOperation } from '~/infrastructures/adminFirestore/KareshiOperations'
 
 const router = createRouter<NextApiRequest, NextApiResponse>()
 
 router.get(async (req, res) => {
-  const kareshiId = typeof req.query.id === 'string' ? req.query.id : undefined
-  if (!kareshiId) {
+  const username =
+    typeof req.query.username === 'string' ? req.query.username : undefined
+  if (!username) {
     res.status(400).json({
       status: 400,
-      message: 'Empty id',
+      message: 'Empty username',
     })
     return
   }
 
-  const kareshi = await fetchKareshiByIdOperation(kareshiId)
+  const kareshi = await fetchKareshiByUsernameOperation(username)
   if (!kareshi) {
     res.status(404).json({
       status: 404,
-      message: `Kareshi ${kareshiId} not found`,
+      message: `Kareshi ${username} not found`,
     })
     return
   }
