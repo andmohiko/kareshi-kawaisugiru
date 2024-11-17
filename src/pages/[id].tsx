@@ -1,7 +1,7 @@
 import { MyPageContainer } from '~/features/mypage/components/MyPageContainer'
 
-const MyPage = () => {
+const KareshiPage = () => {
   return <MyPageContainer />
 }
 
-export default MyPage
+export default KareshiPage

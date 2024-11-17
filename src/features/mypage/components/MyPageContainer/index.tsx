@@ -4,7 +4,7 @@ import { TitleText } from '~/components/Typography/TitleText'
 import { EditKareshiForm } from '~/features/mypage/components/EditKareshiForm'
 import { useMyKareshi } from '~/features/mypage/hooks/useMyKareshi'
 
-export const KareshiContainer = (): React.ReactNode => {
+export const MyPageContainer = (): React.ReactNode => {
   const { kareshi, isLoading } = useMyKareshi()
   return (
     <BaseLayout>
