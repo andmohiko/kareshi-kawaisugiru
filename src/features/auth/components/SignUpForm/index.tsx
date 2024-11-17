@@ -64,7 +64,7 @@ export const SignUpForm = (): React.ReactNode => {
         <BasicButton type="submit" loading={isSubmitting} fullWidth>
           新規登録
         </BasicButton>
-        <BasicButton href="/login" importance="tertiary" fullWidth>
+        <BasicButton href="/i/login" importance="tertiary" fullWidth>
           ログインはこちら
         </BasicButton>
       </FlexBox>

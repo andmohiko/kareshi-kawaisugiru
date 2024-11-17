@@ -38,8 +38,7 @@ export const useSignUp = (): {
       updatedAt: serverTimestamp,
     })
 
-    // 未承認画面へ遷移
-    push('/unapproved')
+    push('/i/mypage')
   }
 
   return {

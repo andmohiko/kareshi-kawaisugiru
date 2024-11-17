@@ -15,7 +15,7 @@ export const useLogin = (): {
 
   const login = async ({ email, password }: Params) => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => push('/mypage'))
+      .then(() => push('/i/mypage'))
       .catch((error) => {
         throw new Error(error)
       })

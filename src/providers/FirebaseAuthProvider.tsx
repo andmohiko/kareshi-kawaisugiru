@@ -32,7 +32,7 @@ export const FirebaseAuthProvider = ({ children }: { children: ReactNode }) => {
 
       // ログインが必要なページでログインしていない場合はログインページにリダイレクト
       if (!user) {
-        push('/login')
+        push('/i/login')
         return
       }
       setUid(user.uid)
