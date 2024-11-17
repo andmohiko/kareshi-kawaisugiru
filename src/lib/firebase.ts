@@ -1,9 +1,9 @@
 import { getAnalytics } from 'firebase/analytics'
 import { initializeApp } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
 import {
   getFirestore,
   serverTimestamp as getServerTimestamp,
-  connectFirestoreEmulator,
 } from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
 
@@ -16,13 +16,11 @@ const config = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 }
 
-const firebaseApp = initializeApp(config)
+const firebaseApp = initializeApp({ ...config })
+export const auth = getAuth(firebaseApp)
+auth.languageCode = 'ja'
+
 export const db = getFirestore()
 export const serverTimestamp = getServerTimestamp()
 export const storage = getStorage()
 export const analytics = getAnalytics()
-export default firebaseApp
-
-if (process.env.USE_EMULATOR === 'true') {
-  connectFirestoreEmulator(db, 'localhost', 8080)
-}

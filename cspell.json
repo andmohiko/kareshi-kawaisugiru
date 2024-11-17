@@ -5,6 +5,8 @@
     "andmohiko",
     "autosize",
     "dropzone",
+    "firebase",
+    "firestore",
     "flatMap",
     "gcloud",
     "hookform",

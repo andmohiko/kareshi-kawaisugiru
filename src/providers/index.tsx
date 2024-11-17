@@ -1,5 +1,6 @@
 import { MantineProvider } from '~/providers/MantineProvider'
 import { LoadingProvider } from '~/providers/LoadingProvider'
+import { FirebaseAuthProvider } from '~/providers/FirebaseAuthProvider'
 
 type Props = {
   children: React.ReactNode
@@ -8,7 +9,9 @@ type Props = {
 export const Providers = ({ children }: Props): React.ReactNode => {
   return (
     <MantineProvider>
-      <LoadingProvider>{children}</LoadingProvider>
+      <LoadingProvider>
+        <FirebaseAuthProvider>{children}</FirebaseAuthProvider>
+      </LoadingProvider>
     </MantineProvider>
   )
 }
