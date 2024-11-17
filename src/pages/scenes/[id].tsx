@@ -2,10 +2,8 @@ import { Stack, Anchor } from '@mantine/core'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 
-import { Scene } from '~/entities'
-
 type Props = {
-  scene: Scene
+  scene: any
 }
 
 const SceneDetailPage = ({ scene }: Props) => (
