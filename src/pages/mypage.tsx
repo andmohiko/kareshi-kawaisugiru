@@ -1,4 +1,4 @@
-import { KareshiContainer } from '~/features/kareshi/components/KareshiContainer'
+import { KareshiContainer } from '~/features/mypage/components/KareshiContainer'
 
 const IndexPage = () => {
   return <KareshiContainer />

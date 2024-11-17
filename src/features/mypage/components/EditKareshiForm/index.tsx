@@ -9,11 +9,11 @@ import { BasicButton } from '~/components/Buttons/BasicButton'
 import { useLoadingContext } from '~/providers/LoadingProvider'
 import { useToast } from '~/hooks/useToast'
 import { errorMessage } from '~/utils/errorMessage'
-import { useSaveKareshi } from '~/features/kareshi/hooks/useSaveKareshi'
+import { useSaveKareshi } from '~/features/mypage/hooks/useSaveKareshi'
 import {
   EditKareshiInputType,
   editKareshiSchema,
-} from '~/features/kareshi/types'
+} from '~/features/mypage/types'
 import { FileInputWithCropper } from '~/components/Inputs/FileInputWithCropper'
 import { useFirebaseAuthContext } from '~/providers/FirebaseAuthProvider'
 import { Kareshi } from '~/entities/Kareshi'

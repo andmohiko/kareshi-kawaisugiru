@@ -1,7 +1,7 @@
 import { createKareshiOperation } from '~/infrastructures/firestore/KareshiOperations'
 import { serverTimestamp } from '~/lib/firebase'
 import { useFirebaseAuthContext } from '~/providers/FirebaseAuthProvider'
-import { EditKareshiInputType } from '~/features/kareshi/types'
+import { EditKareshiInputType } from '~/features/mypage/types'
 
 export const useSaveKareshi = (): {
   createKareshi: (data: EditKareshiInputType) => void
