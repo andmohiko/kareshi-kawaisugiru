@@ -1,13 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { PasswordInput, TextInput } from '@mantine/core'
-import { useForm } from 'react-hook-form'
+import { TextInput } from '@mantine/core'
+import { Controller, useForm } from 'react-hook-form'
 
 import styles from './style.module.css'
 
 import { FlexBox } from '~/components/Base/FlexBox'
 import { BasicButton } from '~/components/Buttons/BasicButton'
 import { useLoadingContext } from '~/providers/LoadingProvider'
-import type { LoginInputType } from '~/features/auth/types'
 import { useToast } from '~/hooks/useToast'
 import { errorMessage } from '~/utils/errorMessage'
 import { useSaveKareshi } from '~/features/kareshi/hooks/useSaveKareshi'
@@ -15,22 +14,26 @@ import {
   EditKareshiInputType,
   editKareshiSchema,
 } from '~/features/kareshi/types'
+import { FileInputWithCropper } from '~/components/Inputs/FileInputWithCropper'
+import { useFirebaseAuthContext } from '~/providers/FirebaseAuthProvider'
 
 export const EditKareshiForm = (): React.ReactNode => {
   const { startLoading, stopLoading } = useLoadingContext()
   const { showErrorToast } = useToast()
   const { createKareshi } = useSaveKareshi()
+  const { uid } = useFirebaseAuthContext()
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<EditKareshiInputType>({
     resolver: zodResolver(editKareshiSchema),
     defaultValues: {
-      landscapeImageUrl: null,
+      landscapeImageUrl: undefined,
       name: null,
-      portraitImageUrl: null,
-      squareImageUrl: null,
+      portraitImageUrl: undefined,
+      squareImageUrl: undefined,
     },
   })
 
@@ -46,13 +49,26 @@ export const EditKareshiForm = (): React.ReactNode => {
   }
 
   return (
-    <form onSubmit={handleSubmit(submit)} className={styles.loginForm}>
+    <form onSubmit={handleSubmit(submit)} className={styles.form}>
       <FlexBox gap={32}>
         <TextInput
           label="普段なんて呼んでる？"
           w="100%"
           {...register('name')}
           error={errors.name?.message}
+        />
+        <Controller
+          name="landscapeImageUrl"
+          control={control}
+          render={({ field }) => (
+            <FileInputWithCropper
+              label="彼氏の写真（横）"
+              value={field.value}
+              onChange={field.onChange}
+              error={errors.landscapeImageUrl?.message}
+              storagePath={uid ? `/images/users/${uid}` : `/images/noUid`}
+            />
+          )}
         />
       </FlexBox>
       <FlexBox gap={16} align="stretch">
