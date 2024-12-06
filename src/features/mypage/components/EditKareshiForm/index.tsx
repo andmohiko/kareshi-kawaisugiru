@@ -31,9 +31,12 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
     register,
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
   } = useForm<EditKareshiInputType>({
-    resolver: zodResolver(editKareshiSchema),
+    resolver: zodResolver(
+      editKareshiSchema(kareshi?.username ? kareshi.username : null),
+    ),
+    mode: 'all',
     defaultValues: {
       kareshiName: kareshi?.kareshiName ? kareshi.kareshiName : null,
       landscapeImageUrl: kareshi?.landscapeImageUrl
@@ -92,7 +95,12 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
         />
       </FlexBox>
       <FlexBox gap={16} align="stretch">
-        <BasicButton type="submit" loading={isSubmitting} fullWidth>
+        <BasicButton
+          type="submit"
+          loading={isSubmitting}
+          disabled={!isValid}
+          fullWidth
+        >
           保存
         </BasicButton>
       </FlexBox>
