@@ -24,7 +24,7 @@ type Props = {
 
 export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
   const { startLoading, stopLoading } = useLoadingContext()
-  const { showErrorToast } = useToast()
+  const { showErrorToast, showSuccessToast } = useToast()
   const { createKareshi } = useSaveKareshi()
   const { uid } = useFirebaseAuthContext()
   const {
@@ -56,6 +56,7 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
     try {
       startLoading()
       await createKareshi(data)
+      showSuccessToast('彼氏を保存しました')
     } catch (e) {
       showErrorToast(errorMessage(e))
     } finally {
