@@ -9,16 +9,19 @@ import { convertDate } from '~/utils/convertDate'
 
 export const fetchKareshiByUsernameOperation = async (
   username: string,
-): Promise<Kareshi> => {
+): Promise<Kareshi | null> => {
   const snapshot = await db
     .collection(kareshiCollection)
     .where('username', '==', username)
     .limit(1)
     .get()
+  if (snapshot.empty) {
+    return null
+  }
   const docSnapshot = snapshot.docs[0]
   const data = docSnapshot.data()
   if (!data) {
-    throw new Error(`Kareshi ${username} not found`)
+    return null
   }
   return {
     kareshiId: docSnapshot.id,

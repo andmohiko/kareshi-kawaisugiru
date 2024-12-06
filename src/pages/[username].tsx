@@ -63,16 +63,27 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
     }
   }
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL}/api/kareshi/${validationResult.data.username}`,
-  )
-  const kareshi = await res.json()
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/kareshi/${validationResult.data.username}`,
+    )
+    if (!res.ok) {
+      return {
+        notFound: true,
+      }
+    }
 
-  return {
-    props: {
-      kareshi,
-    },
-    revalidate: 300, // 5分ごとにページを再生成
+    const kareshi = await res.json()
+    return {
+      props: {
+        kareshi,
+      },
+      revalidate: 300, // 5分ごとにページを再生成
+    }
+  } catch (e) {
+    return {
+      notFound: true,
+    }
   }
 }
 
