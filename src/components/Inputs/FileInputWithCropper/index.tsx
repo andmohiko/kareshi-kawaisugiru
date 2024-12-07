@@ -20,6 +20,8 @@ type Props = {
   error: string | undefined
   label: React.ReactNode
   storagePath: string
+  ratioWidth?: number
+  ratioHeight?: number
 }
 
 export const FileInputWithCropper = ({
@@ -28,12 +30,14 @@ export const FileInputWithCropper = ({
   error,
   label,
   storagePath,
+  ratioWidth = 16,
+  ratioHeight = 9,
 }: Props): React.ReactElement => {
   const [
     { file, uncroppedImageUrl, selectedImageRef, crop },
     { onSelectImage, remove, onCrop, onChangeCrop, closeCropper },
     { isOpenCropper, isDisabled, isLoading },
-  ] = useCropImageInput(storagePath, value, onChange)
+  ] = useCropImageInput(storagePath, value, onChange, ratioWidth, ratioHeight)
 
   return (
     <div className={styles.fileInputWithCropper}>
@@ -85,7 +89,7 @@ export const FileInputWithCropper = ({
               <ReactCrop
                 crop={crop}
                 onChange={(c) => onChangeCrop(c)}
-                aspect={16 / 9}
+                aspect={ratioWidth / ratioHeight}
                 keepSelection={true}
               >
                 <img

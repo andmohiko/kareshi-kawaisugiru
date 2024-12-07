@@ -13,10 +13,14 @@ export type FileWithPath = File & {
 type FileUrl = string
 export type FileObject = FileUrl
 
+const baseWidth = 300
+
 export const useCropImageInput = (
   storagePath: string,
   file: FileObject | undefined,
   setFile: (file: FileObject | undefined) => void,
+  ratioWidth: number,
+  ratioHeight: number,
 ): [
   {
     file: FileObject | undefined
@@ -49,8 +53,8 @@ export const useCropImageInput = (
     unit: 'px',
     x: 0,
     y: 0,
-    width: 1080,
-    height: 607,
+    width: baseWidth,
+    height: (baseWidth * ratioHeight) / ratioWidth,
   })
 
   // canvasで画像を扱うため、アップロードした画像のuncroppedImageUrlをもとに、imgのHTMLElementを作る

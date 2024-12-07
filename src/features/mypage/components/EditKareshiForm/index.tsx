@@ -85,6 +85,23 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
               onChange={field.onChange}
               error={errors.landscapeImageUrl?.message}
               storagePath={uid ? `/images/users/${uid}` : `/images/noUid`}
+              ratioWidth={16}
+              ratioHeight={9}
+            />
+          )}
+        />
+        <Controller
+          name="portraitImageUrl"
+          control={control}
+          render={({ field }) => (
+            <FileInputWithCropper
+              label="彼氏の写真（縦）"
+              value={field.value}
+              onChange={field.onChange}
+              error={errors.portraitImageUrl?.message}
+              storagePath={uid ? `/images/users/${uid}` : `/images/noUid`}
+              ratioWidth={9}
+              ratioHeight={16}
             />
           )}
         />
