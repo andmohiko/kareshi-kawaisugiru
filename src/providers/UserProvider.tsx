@@ -6,7 +6,7 @@ import { fetchUserByIdOperation } from '~/infrastructures/firestore/UserOperatio
 
 import { useFirebaseAuthContext } from '~/providers/FirebaseAuthProvider'
 
-const authPaths = ['/', '/i/mypage', '/i/signup', '/i/login']
+const authPaths = ['/i/mypage']
 
 const UserContext = createContext<{
   user: User | null
@@ -24,13 +24,12 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     // ログイン不要なページではなにもしない
-    if (authPaths.includes(pathname)) {
+    if (!authPaths.includes(pathname)) {
       return
     }
 
-    // 未ログインならログインページにリダイレクト
+    // uidが無い場合はなにもしない
     if (!uid) {
-      push('/i/login')
       return
     }
 
@@ -46,7 +45,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       setUser(user)
     }
     func()
-  }, [pathname, push])
+  }, [pathname, push, uid])
 
   return (
     <UserContext.Provider value={{ user, isRegistered }}>
