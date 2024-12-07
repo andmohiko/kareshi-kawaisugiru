@@ -61,6 +61,9 @@ export const FileInputWithCropper = ({
             maxSize={100 * 1024 ** 2}
             accept={IMAGE_MIME_TYPE}
             className={styles.dropzone}
+            style={{
+              height: `calc(100vw * ${ratioHeight} / ${ratioWidth})`,
+            }}
             disabled={isDisabled || isLoading}
           >
             <FlexBox gap={16} justify="center">
