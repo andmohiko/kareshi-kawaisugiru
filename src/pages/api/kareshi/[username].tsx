@@ -16,6 +16,15 @@ router.get(async (req, res) => {
     return
   }
 
+  // usernameが3文字以下ならinvalidなIDとして扱う
+  if (username.length <= 3) {
+    res.status(400).json({
+      status: 400,
+      message: 'Invalid username',
+    })
+    return
+  }
+
   const kareshi = await fetchKareshiByUsernameOperation(username)
   if (!kareshi) {
     res.status(404).json({

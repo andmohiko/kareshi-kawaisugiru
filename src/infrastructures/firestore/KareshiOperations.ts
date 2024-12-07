@@ -1,4 +1,13 @@
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  limit,
+  query,
+  setDoc,
+  where,
+} from 'firebase/firestore'
 import {
   CreateKareshiDto,
   dateColumns,
@@ -28,4 +37,17 @@ export const createKareshiOperation = async (
   dto: CreateKareshiDto,
 ) => {
   await setDoc(doc(db, kareshiCollection, kareshiId), dto)
+}
+
+export const isExistKareshiByUsernameOperation = async (
+  username: string,
+): Promise<boolean> => {
+  const snapshot = await getDocs(
+    query(
+      collection(db, kareshiCollection),
+      where('username', '==', username),
+      limit(1),
+    ),
+  )
+  return snapshot.size > 0
 }

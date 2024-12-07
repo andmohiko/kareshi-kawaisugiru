@@ -24,16 +24,19 @@ type Props = {
 
 export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
   const { startLoading, stopLoading } = useLoadingContext()
-  const { showErrorToast } = useToast()
+  const { showErrorToast, showSuccessToast } = useToast()
   const { createKareshi } = useSaveKareshi()
   const { uid } = useFirebaseAuthContext()
   const {
     register,
     control,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
   } = useForm<EditKareshiInputType>({
-    resolver: zodResolver(editKareshiSchema),
+    resolver: zodResolver(
+      editKareshiSchema(kareshi?.username ? kareshi.username : null),
+    ),
+    mode: 'all',
     defaultValues: {
       kareshiName: kareshi?.kareshiName ? kareshi.kareshiName : null,
       landscapeImageUrl: kareshi?.landscapeImageUrl
@@ -53,6 +56,7 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
     try {
       startLoading()
       await createKareshi(data)
+      showSuccessToast('彼氏を保存しました')
     } catch (e) {
       showErrorToast(errorMessage(e))
     } finally {
@@ -63,7 +67,8 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
   return (
     <form onSubmit={handleSubmit(submit)} className={styles.form}>
       <FlexBox gap={32}>
-        {/* ユニーク制約を入れる */}
+        {/* TODO: ユニーク制約を入れる */}
+        {/* TODO: 文字の種類の制約を入れる */}
         <TextInput
           label="彼氏ID(URLに使われるよ)"
           w="100%"
@@ -80,6 +85,23 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
               onChange={field.onChange}
               error={errors.landscapeImageUrl?.message}
               storagePath={uid ? `/images/users/${uid}` : `/images/noUid`}
+              ratioWidth={16}
+              ratioHeight={9}
+            />
+          )}
+        />
+        <Controller
+          name="portraitImageUrl"
+          control={control}
+          render={({ field }) => (
+            <FileInputWithCropper
+              label="彼氏の写真（縦）"
+              value={field.value}
+              onChange={field.onChange}
+              error={errors.portraitImageUrl?.message}
+              storagePath={uid ? `/images/users/${uid}` : `/images/noUid`}
+              ratioWidth={9}
+              ratioHeight={16}
             />
           )}
         />
@@ -91,7 +113,12 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
         />
       </FlexBox>
       <FlexBox gap={16} align="stretch">
-        <BasicButton type="submit" loading={isSubmitting} fullWidth>
+        <BasicButton
+          type="submit"
+          loading={isSubmitting}
+          disabled={!isValid}
+          fullWidth
+        >
           保存
         </BasicButton>
       </FlexBox>

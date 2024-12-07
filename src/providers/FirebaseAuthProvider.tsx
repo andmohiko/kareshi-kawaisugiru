@@ -3,28 +3,33 @@ import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import type { ReactNode } from 'react'
 import { createContext, useContext, useEffect, useState } from 'react'
+import { LoadingOverlay } from '~/components/Base/LoadingOverlay'
 
 import { auth } from '~/lib/firebase'
 
-const authPaths = ['/i/mypage']
+const authPaths = ['/', '/i/mypage', '/i/signup', '/i/login']
 
 const FirebaseAuthContext = createContext<{
-  uid: string | null
-  currentUser: User | null
+  uid: string | null | undefined
+  currentUser: User | null | undefined
   logout: () => void
 }>({
-  uid: null,
-  currentUser: null,
+  uid: undefined,
+  currentUser: undefined,
   logout: () => {},
 })
 
 export const FirebaseAuthProvider = ({ children }: { children: ReactNode }) => {
   const { pathname, push } = useRouter()
-  const [uid, setUid] = useState<string | null>(null)
-  const [currentUser, setCurrentUser] = useState<User | null>(null)
+  const [uid, setUid] = useState<string | null | undefined>(undefined)
+  const [currentUser, setCurrentUser] = useState<User | null | undefined>(
+    undefined,
+  )
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setUid(null)
+      setCurrentUser(null)
       // ログイン不要なページではなにもしない
       if (!authPaths.includes(pathname)) {
         return
@@ -47,6 +52,10 @@ export const FirebaseAuthProvider = ({ children }: { children: ReactNode }) => {
     setCurrentUser(null)
     await signOut(auth)
     push('/')
+  }
+
+  if (uid === undefined) {
+    return <LoadingOverlay />
   }
 
   return (

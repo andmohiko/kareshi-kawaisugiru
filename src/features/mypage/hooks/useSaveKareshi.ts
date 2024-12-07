@@ -16,9 +16,9 @@ export const useSaveKareshi = (): {
     await createKareshiOperation(uid, {
       createdAt: serverTimestamp,
       kareshiName: data.kareshiName,
-      landscapeImageUrl: data.landscapeImageUrl ?? null,
-      portraitImageUrl: data.portraitImageUrl ?? null,
-      squareImageUrl: data.squareImageUrl ?? null,
+      landscapeImageUrl: data.landscapeImageUrl ? data.landscapeImageUrl : null,
+      portraitImageUrl: data.portraitImageUrl ? data.portraitImageUrl : null,
+      squareImageUrl: data.squareImageUrl ? data.squareImageUrl : null,
       updatedAt: serverTimestamp,
       username: data.username,
     })
