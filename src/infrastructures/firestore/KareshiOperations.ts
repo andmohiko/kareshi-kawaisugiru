@@ -4,8 +4,10 @@ import {
   getDoc,
   getDocs,
   limit,
+  onSnapshot,
   query,
   setDoc,
+  Unsubscribe,
   where,
 } from 'firebase/firestore'
 import {
@@ -18,18 +20,28 @@ import {
 import { db } from '~/lib/firebase'
 import { convertDate } from '~/utils/convertDate'
 
-export const fetchKareshiByIdOperation = async (
+export const subscribeKareshiByIdOperation = (
   kareshiId: KareshiId,
-): Promise<Kareshi | null> => {
-  const snapshot = await getDoc(doc(db, kareshiCollection, kareshiId))
-  const data = snapshot.data()
-  if (!snapshot.exists() || !data) {
-    return null
-  }
-  return {
-    kareshiId: snapshot.id,
-    ...convertDate(data, dateColumns),
-  } as Kareshi
+  setState: (kareshi: Kareshi | null) => void,
+  setIsLoading: (isLoading: boolean) => void,
+): Unsubscribe => {
+  const unsubscribe = onSnapshot(
+    doc(db, kareshiCollection, kareshiId),
+    (snapshot) => {
+      setIsLoading(true)
+      const data = snapshot.data()
+      if (!snapshot.exists() || !data) {
+        return null
+      }
+      const kareshi = {
+        kareshiId: snapshot.id,
+        ...convertDate(data, dateColumns),
+      } as Kareshi
+      setState(kareshi)
+      setIsLoading(false)
+    },
+  )
+  return unsubscribe
 }
 
 export const createKareshiOperation = async (
