@@ -9,8 +9,10 @@ import { useFirebaseAuthContext } from '~/providers/FirebaseAuthProvider'
 const authPaths = ['/', '/i/mypage', '/i/signup', '/i/login']
 
 const UserContext = createContext<{
+  user: User | null
   isRegistered: boolean
 }>({
+  user: null,
   isRegistered: false,
 })
 
@@ -19,7 +21,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [isRegistered, setIsRegistered] = useState<boolean>(false)
   const { uid } = useFirebaseAuthContext()
   const [user, setUser] = useState<User | null>(null)
-  const [currentUser, setCurrentUser] = useState<User | null>(null)
 
   useEffect(() => {
     // ログイン不要なページではなにもしない
@@ -48,7 +49,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   }, [pathname, push])
 
   return (
-    <UserContext.Provider value={{ isRegistered }}>
+    <UserContext.Provider value={{ user, isRegistered }}>
       {children}
     </UserContext.Provider>
   )

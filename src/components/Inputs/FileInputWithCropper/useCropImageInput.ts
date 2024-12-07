@@ -120,7 +120,7 @@ export const useCropImageInput = (
   }, [fileData])
 
   const remove = useCallback(() => {
-    setFile(undefined)
+    setFile('')
   }, [setFile])
 
   const onSelectImage = useCallback((inputFiles: Array<FileWithPath>): void => {
