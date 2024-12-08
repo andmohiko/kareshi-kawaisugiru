@@ -16,9 +16,15 @@ export const MyPageContainer = (): React.ReactNode => {
         {!isLoading ? <EditKareshiForm kareshi={kareshi} /> : null}
       </div>
       <div className={styles.actions}>
-        <BasicButton href={`/${kareshi?.username}`} importance="secondary">
-          彼氏のページを開く
-        </BasicButton>
+        {kareshi?.username && (
+          <BasicButton
+            href={`/${kareshi.username}`}
+            importance="secondary"
+            disabled={!kareshi?.username}
+          >
+            彼氏のページを開く
+          </BasicButton>
+        )}
         <BasicButton importance="tertiary" onClick={logout}>
           ログアウト
         </BasicButton>

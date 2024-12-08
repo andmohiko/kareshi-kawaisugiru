@@ -2,6 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   padding: 32px 16px;
+  min-height: 100vh;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  .name {
+    font-size: 4rem;
+    font-weight: bold;
+  }
 }

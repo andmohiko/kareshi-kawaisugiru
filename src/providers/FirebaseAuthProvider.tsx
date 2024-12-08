@@ -7,7 +7,7 @@ import { LoadingOverlay } from '~/components/Base/LoadingOverlay'
 
 import { auth } from '~/lib/firebase'
 
-const authPaths = ['/', '/i/mypage', '/i/signup', '/i/login']
+const authPaths = ['/i/mypage']
 
 const FirebaseAuthContext = createContext<{
   uid: string | null | undefined
@@ -31,7 +31,7 @@ export const FirebaseAuthProvider = ({ children }: { children: ReactNode }) => {
       setUid(null)
       setCurrentUser(null)
       // ログイン不要なページではなにもしない
-      if (authPaths.includes(pathname)) {
+      if (!authPaths.includes(pathname)) {
         return
       }
 

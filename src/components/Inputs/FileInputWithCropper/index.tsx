@@ -13,6 +13,7 @@ import { useCropImageInput, type FileObject } from './useCropImageInput'
 
 import { FlexBox } from '~/components/Base/FlexBox'
 import { ActionModal } from '~/components/Modals/ActionModal'
+import { useEffect, useRef, useState } from 'react'
 
 type Props = {
   value: FileObject | undefined
@@ -39,8 +40,28 @@ export const FileInputWithCropper = ({
     { isOpenCropper, isDisabled, isLoading },
   ] = useCropImageInput(storagePath, value, onChange, ratioWidth, ratioHeight)
 
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const [containerWidth, setContainerWidth] = useState<number>(0)
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.offsetWidth)
+      }
+    }
+
+    updateWidth() // 初期設定
+    window.addEventListener('resize', updateWidth) // リサイズイベントを監視
+
+    return () => {
+      window.removeEventListener('resize', updateWidth) // クリーンアップ
+    }
+  }, [])
+
+  const calculatedHeight = (containerWidth * ratioHeight) / ratioWidth
+
   return (
-    <div className={styles.fileInputWithCropper}>
+    <div ref={containerRef} className={styles.fileInputWithCropper}>
       <p className={styles.title}>{label}</p>
       {file ? (
         <ImagePreview file={file} onRemove={remove} />
@@ -62,7 +83,7 @@ export const FileInputWithCropper = ({
             accept={IMAGE_MIME_TYPE}
             className={styles.dropzone}
             style={{
-              height: `calc(100vw * ${ratioHeight} / ${ratioWidth})`,
+              height: calculatedHeight,
             }}
             disabled={isDisabled || isLoading}
           >
