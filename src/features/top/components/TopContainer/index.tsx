@@ -12,6 +12,7 @@ export const TopContainer = (): React.ReactNode => {
           width={329}
           height={191}
           alt="彼氏がかわいすぎる.com"
+          className={styles.logo}
         />
         <div className={styles.action}>
           <BasicButton href="/i/mypage">彼氏のページを作る</BasicButton>
