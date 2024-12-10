@@ -105,6 +105,21 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
             />
           )}
         />
+        <Controller
+          name="squareImageUrl"
+          control={control}
+          render={({ field }) => (
+            <FileInputWithCropper
+              label="彼氏の写真（正方形）"
+              value={field.value}
+              onChange={field.onChange}
+              error={errors.squareImageUrl?.message}
+              storagePath={uid ? `/images/users/${uid}` : `/images/noUid`}
+              ratioWidth={1}
+              ratioHeight={1}
+            />
+          )}
+        />
         <TextInput
           label="普段なんて呼んでる？"
           w="100%"
