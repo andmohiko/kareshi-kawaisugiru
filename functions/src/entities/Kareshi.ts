@@ -1,4 +1,4 @@
-import type { FieldValue } from 'firebase/firestore'
+import type { FieldValue } from 'firebase-admin/firestore'
 
 import type { Uid } from '.'
 
@@ -23,10 +23,7 @@ export type Kareshi = {
   username: string | null
 }
 
-export type CreateKareshiDto = Omit<
-  Kareshi,
-  'kareshiId' | 'createdAt' | 'updatedAt'
-> & {
-  createdAt: FieldValue
+export type UpdateKareshiDto = {
+  ogpImageUrl?: Kareshi['ogpImageUrl']
   updatedAt: FieldValue
 }

@@ -17,6 +17,7 @@ export const useSaveKareshi = (): {
       createdAt: serverTimestamp,
       kareshiName: data.kareshiName,
       landscapeImageUrl: data.landscapeImageUrl ? data.landscapeImageUrl : null,
+      ogpImageUrl: null,
       portraitImageUrl: data.portraitImageUrl ? data.portraitImageUrl : null,
       squareImageUrl: data.squareImageUrl ? data.squareImageUrl : null,
       updatedAt: serverTimestamp,
