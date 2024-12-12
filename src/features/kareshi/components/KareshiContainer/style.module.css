@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,8 +11,45 @@
   background-repeat: no-repeat;
   background-position: center;
 
-  .name {
-    font-size: 4rem;
-    font-weight: bold;
+  .footer {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(34, 34, 34, 0) 0%, #222222 100%);
+
+    .info {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+      width: 800px;
+
+      @media (max-width: 768px) {
+        width: 180px;
+      }
+
+      .name {
+        font-size: 6rem;
+        font-weight: bold;
+        color: var(--color-base-white);
+        text-align: left;
+
+        @media (max-width: 768px) {
+          font-size: 2.5rem;
+        }
+      }
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 32px;
+      right: 32px;
+      width: 360px;
+
+      @media (max-width: 768px) {
+        width: 132px;
+      }
+    }
   }
 }
