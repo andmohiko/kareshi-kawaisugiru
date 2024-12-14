@@ -4,6 +4,7 @@ import { getAuth } from 'firebase/auth'
 import {
   getFirestore,
   serverTimestamp as getServerTimestamp,
+  connectFirestoreEmulator,
 } from 'firebase/firestore'
 import { getStorage } from 'firebase/storage'
 
@@ -25,3 +26,7 @@ export const serverTimestamp = getServerTimestamp()
 export const storage = getStorage()
 // window オブジェクトがあるときだけ getAnalytics() を呼び出す
 export const analytics = typeof window !== 'undefined' ? getAnalytics() : null
+
+if (process.env.NEXT_PUBLIC_USE_EMULATOR === 'true') {
+  connectFirestoreEmulator(db, 'localhost', 8080)
+}
