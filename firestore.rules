@@ -22,10 +22,11 @@ service cloud.firestore {
     }
 
     function isValidKareshiSchema(requestData) {
-      return requestData.size() == 7
+      return requestData.size() == 8
         && 'createdAt' in requestData && requestData.createdAt is timestamp
         && 'kareshiName' in requestData && (requestData.kareshiName is string || requestData.kareshiName == null)
         && 'landscapeImageUrl' in requestData && (requestData.landscapeImageUrl is string || requestData.landscapeImageUrl == null)
+        && 'ogpImageUrl' in requestData && (requestData.ogpImageUrl is string || requestData.ogpImageUrl == null)
         && 'portraitImageUrl' in requestData && (requestData.portraitImageUrl is string || requestData.portraitImageUrl == null)
         && 'squareImageUrl' in requestData && (requestData.squareImageUrl is string || requestData.squareImageUrl == null)
         && 'updatedAt' in requestData && requestData.updatedAt is timestamp

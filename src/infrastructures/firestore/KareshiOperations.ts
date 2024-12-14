@@ -31,6 +31,7 @@ export const subscribeKareshiByIdOperation = (
       setIsLoading(true)
       const data = snapshot.data()
       if (!snapshot.exists() || !data) {
+        setIsLoading(false)
         return null
       }
       const kareshi = {

@@ -58,6 +58,7 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
       await createKareshi(data)
       showSuccessToast('彼氏を保存しました')
     } catch (e) {
+      console.log('error', e)
       showErrorToast(errorMessage(e))
     } finally {
       stopLoading()
