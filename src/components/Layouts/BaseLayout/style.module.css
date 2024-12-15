@@ -1,7 +1,7 @@
 .base {
   display: flex;
   justify-content: center;
-  background-color: var(--color-primary);
+  background-color: var(--color-bg-primary);
 
   .pageLayout {
     width: 100%;

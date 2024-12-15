@@ -10,7 +10,10 @@ export const TitleText = ({
   level = 1,
 }: Props): React.ReactElement => {
   return (
-    <Title order={level} style={{ marginBottom: 16 }}>
+    <Title
+      order={level}
+      style={{ marginBottom: 16, fontFamily: 'Hiragino Maru Gothic ProN' }}
+    >
       {children}
     </Title>
   )

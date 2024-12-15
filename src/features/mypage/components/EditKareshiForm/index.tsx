@@ -58,6 +58,7 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
       await createKareshi(data)
       showSuccessToast('彼氏を保存しました')
     } catch (e) {
+      console.log('error', e)
       showErrorToast(errorMessage(e))
     } finally {
       stopLoading()
@@ -102,6 +103,21 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
               storagePath={uid ? `/images/users/${uid}` : `/images/noUid`}
               ratioWidth={9}
               ratioHeight={16}
+            />
+          )}
+        />
+        <Controller
+          name="squareImageUrl"
+          control={control}
+          render={({ field }) => (
+            <FileInputWithCropper
+              label="彼氏の写真（正方形）"
+              value={field.value}
+              onChange={field.onChange}
+              error={errors.squareImageUrl?.message}
+              storagePath={uid ? `/images/users/${uid}` : `/images/noUid`}
+              ratioWidth={1}
+              ratioHeight={1}
             />
           )}
         />

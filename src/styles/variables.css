@@ -3,6 +3,9 @@
   --color-primary: rgba(255, 97, 208, 1);
   --color-bg-white: #ffffff;
 
+  /* Background Colors */
+  --color-bg-primary: rgb(250, 220, 240);
+
   /* Base Colors */
   --color-base-white: #ffffff;
 }

@@ -19,4 +19,4 @@ export const getButtonVariant = (
   return 'default'
 }
 
-export const buttonColor = 'rgba(255, 97, 208, 1)'
+export const buttonColor = '#323232'

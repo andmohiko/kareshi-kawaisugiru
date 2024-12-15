@@ -122,7 +122,8 @@ export const FileInputWithCropper = ({
                   alt=""
                   style={{
                     height: '100%',
-                    width: '100%',
+                    maxHeight: '75vh',
+                    width: 'auto',
                     maxWidth: 1080,
                   }}
                 />

@@ -3,6 +3,7 @@ import styles from './style.module.css'
 
 import { Kareshi } from '~/entities/Kareshi'
 import { FullScreenLayout } from '~/components/Layouts/FullScreenLayout'
+import Image from 'next/image'
 
 type Props = {
   kareshi: Kareshi
@@ -32,6 +33,7 @@ export const KareshiContainer = ({ kareshi }: Props): React.ReactNode => {
     }
     return kareshi.landscapeImageUrl ?? ''
   }
+
   return (
     <FullScreenLayout>
       <div
@@ -40,7 +42,18 @@ export const KareshiContainer = ({ kareshi }: Props): React.ReactNode => {
           backgroundImage: `url(${kareshiImageUrl()})`,
         }}
       >
-        <h1 className={styles.name}>{kareshi.kareshiName}</h1>
+        <div className={styles.footer}>
+          <div className={styles.info}>
+            <h1 className={styles.name}>{kareshi.kareshiName}</h1>
+          </div>
+          <Image
+            src="/images/logo-white.webp"
+            width={979}
+            height={565}
+            alt="彼氏がかわいすぎる.com"
+            className={styles.logo}
+          />
+        </div>
       </div>
     </FullScreenLayout>
   )
