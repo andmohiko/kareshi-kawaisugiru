@@ -2,7 +2,10 @@ import { z } from 'zod'
 import { isExistKareshiByUsernameOperation } from '~/infrastructures/firestore/KareshiOperations'
 
 const kareshiSchema = z.object({
-  kareshiName: z.string().nullable(),
+  kareshiName: z
+    .string()
+    .max(8, { message: '8文字以内にしてください' })
+    .nullable(),
   landscapeImageUrl: z.string().optional(),
   portraitImageUrl: z.string().optional(),
   squareImageUrl: z.string().optional(),
