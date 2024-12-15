@@ -17,8 +17,7 @@ const KareshiPage: NextPage<Props> = ({ kareshi }: Props) => {
     ? `私の彼氏の${kareshi.kareshiName}です`
     : 'うちの彼氏です。'
   const ogpImageUrl =
-    kareshi.landscapeImageUrl ??
-    `${process.env.NEXT_PUBLIC_APP_URL}/images/ogp.png`
+    kareshi.ogpImageUrl ?? `${process.env.NEXT_PUBLIC_APP_URL}/images/ogp.png`
   return (
     <>
       <NextSeo
