@@ -13,6 +13,9 @@ const kareshiSchema = z.object({
     .string()
     .min(4, { message: '4文字以上にしてください' })
     .max(30, { message: '30文字以内にしてください' })
+    .regex(/^[a-zA-Z0-9_]+$/, {
+      message: '使用できるのは英数字とアンダースコア(_)のみです',
+    })
     .nullable(),
 })
 
