@@ -6,12 +6,12 @@ const IndexPage = () => {
     <>
       <NextSeo
         title="彼氏がかわいすぎる.com"
-        description="彼氏がかわいすぎる.com"
+        description="うちの彼氏がかわいすぎる"
         nofollow={false}
         canonical={process.env.NEXT_PUBLIC_APP_URL}
         openGraph={{
           title: '彼氏がかわいすぎる.com',
-          description: '彼氏がかわいすぎる.com',
+          description: 'うちの彼氏がかわいすぎる',
           url: process.env.NEXT_PUBLIC_APP_URL,
           type: 'website',
           images: [
