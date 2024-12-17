@@ -78,7 +78,6 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
       props: {
         kareshi,
       },
-      revalidate: 60,
     }
   } catch (e) {
     return {
