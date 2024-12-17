@@ -1,4 +1,8 @@
-import { Button, CopyButton as MantineCopyButton } from '@mantine/core'
+import {
+  ActionIcon,
+  Button,
+  CopyButton as MantineCopyButton,
+} from '@mantine/core'
 import { IoLinkSharp } from 'react-icons/io5'
 
 import type { ButtonImportance, ButtonSize } from '~/components/Buttons/types'
@@ -46,6 +50,37 @@ export const CopyButton = ({
         >
           {copied ? 'コピーしました' : children}
         </Button>
+      )}
+    </MantineCopyButton>
+  )
+}
+
+export const CopyIconButton = ({
+  copyText,
+  importance = 'primary',
+  size = 'lg',
+  disabled = false,
+}: Omit<Props, 'children' | 'width' | 'fullWidth'>): React.ReactNode => {
+  const copiedImportance = importance === 'primary' ? 'secondary' : 'primary'
+  return (
+    <MantineCopyButton value={copyText}>
+      {({ copied, copy }) => (
+        <ActionIcon
+          onClick={copy}
+          variant={
+            copied
+              ? getButtonVariant(copiedImportance)
+              : getButtonVariant(importance)
+          }
+          disabled={disabled}
+          color={buttonColor}
+          size={size}
+          style={{
+            backgroundColor: copied ? undefined : 'var(--color-bg-white)',
+          }}
+        >
+          <IoLinkSharp size={20} />
+        </ActionIcon>
       )}
     </MantineCopyButton>
   )

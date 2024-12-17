@@ -35,8 +35,12 @@
         color: var(--color-base-white);
         text-align: left;
 
+        @media (max-width: 1020px) {
+          font-size: 4rem;
+        }
+
         @media (max-width: 768px) {
-          font-size: 2.5rem;
+          font-size: 2rem;
         }
       }
     }
@@ -57,8 +61,16 @@
       bottom: 32px;
 
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
+      align-items: center;
       width: 100%;
+      padding-inline: 32px;
+
+      .share {
+        display: flex;
+        justify-content: flex-start;
+        gap: 16px;
+      }
     }
   }
 }

@@ -153,11 +153,11 @@ export const ImagePreview = ({
   <div className={styles.imagePreview}>
     <Image src={file} alt="" className={styles.image} />
     <CloseButton
-      size="sm"
-      variant="light"
+      size="xl"
+      variant="subtle"
       pos="absolute"
-      top={-4}
-      right={-4}
+      top={-2}
+      right={-2}
       color="gray"
       onClick={onRemove}
     />

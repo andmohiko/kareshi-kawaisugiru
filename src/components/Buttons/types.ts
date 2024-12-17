@@ -2,7 +2,7 @@ import type { ButtonProps } from '@mantine/core'
 
 export type ButtonImportance = 'primary' | 'secondary' | 'tertiary'
 
-export type ButtonSize = 'sm' | 'md' | 'lg'
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl'
 
 export const getButtonVariant = (
   importance: ButtonImportance,
