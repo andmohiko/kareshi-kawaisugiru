@@ -6,7 +6,7 @@ const kareshiSchema = z.object({
     .string()
     .max(8, { message: '8文字以内にしてください' })
     .nullable(),
-  landscapeImageUrl: z.string().optional(),
+  landscapeImageUrl: z.string().min(1, { message: '画像を選択してください' }),
   portraitImageUrl: z.string().optional(),
   squareImageUrl: z.string().optional(),
   username: z
@@ -24,6 +24,7 @@ export const editKareshiSchema = (currentUsername: string | null) => {
   // usernameが入力済みのときはusernameの重複チェックを追加する
   return kareshiSchema.refine(
     async (data) => {
+      // usernameが未入力または自分が使用中のusernameのときは重複チェックを行わない
       if (!data || !data.username || data.username === currentUsername) {
         return true
       }

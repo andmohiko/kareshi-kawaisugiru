@@ -68,7 +68,6 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
   return (
     <form onSubmit={handleSubmit(submit)} className={styles.form}>
       <FlexBox gap={32}>
-        {/* TODO: ユニーク制約を入れる */}
         {/* TODO: 文字の種類の制約を入れる */}
         <TextInput
           label="彼氏ID"
