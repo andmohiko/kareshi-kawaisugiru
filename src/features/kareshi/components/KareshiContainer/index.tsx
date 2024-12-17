@@ -4,6 +4,10 @@ import styles from './style.module.css'
 import { Kareshi } from '~/entities/Kareshi'
 import { FullScreenLayout } from '~/components/Layouts/FullScreenLayout'
 import Image from 'next/image'
+import { BasicButton } from '~/components/Buttons/BasicButton'
+import { FaXTwitter } from 'react-icons/fa6'
+import { IoLinkSharp } from 'react-icons/io5'
+import { CopyButton } from '~/components/Buttons/CopyButton'
 
 type Props = {
   kareshi: Kareshi
@@ -53,6 +57,19 @@ export const KareshiContainer = ({ kareshi }: Props): React.ReactNode => {
             alt="彼氏がかわいすぎる.com"
             className={styles.logo}
           />
+          <div className={styles.actions}>
+            <BasicButton width="175px" leftSection={<FaXTwitter />}>
+              ポストで共有
+            </BasicButton>
+            <CopyButton
+              copyText={`${process.env.NEXT_PUBLIC_APP_URL}/${kareshi.username}`}
+              width="175px"
+              leftSection={<IoLinkSharp />}
+              importance="secondary"
+            >
+              リンクをコピー
+            </CopyButton>
+          </div>
         </div>
       </div>
     </FullScreenLayout>
