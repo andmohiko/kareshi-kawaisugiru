@@ -7,7 +7,9 @@
   --color-bg-primary: rgb(250, 220, 240);
 
   /* Base Colors */
+  --color-base-black: #323232;
   --color-base-white: #ffffff;
+  --color-base-gray: #868e96;
 
   /* Functional Colors */
   --color-description: #868e96;

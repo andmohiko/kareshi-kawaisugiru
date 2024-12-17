@@ -1,4 +1,3 @@
-import { isAxiosError } from 'axios'
 import { Kareshi } from '~/entities/Kareshi'
 import type { User as AuthUser } from 'firebase/auth'
 import { User } from '~/entities/User'
@@ -23,10 +22,6 @@ export const fetchOgpImageUrlOperation = async (
     )
     return response.data.ogpImagePath
   } catch (error) {
-    if (isAxiosError(error)) {
-      throw new Error(error.response?.data.message)
-    } else {
-      throw error
-    }
+    throw new Error('彼氏画像の作成に失敗しました')
   }
 }

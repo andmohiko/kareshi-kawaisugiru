@@ -6,7 +6,6 @@ import styles from './style.module.css'
 
 import { FlexBox } from '~/components/Base/FlexBox'
 import { BasicButton } from '~/components/Buttons/BasicButton'
-import { useLoadingContext } from '~/providers/LoadingProvider'
 import { useToast } from '~/hooks/useToast'
 import { errorMessage } from '~/utils/errorMessage'
 import { useSaveKareshi } from '~/features/mypage/hooks/useSaveKareshi'
@@ -17,15 +16,16 @@ import {
 import { FileInputWithCropper } from '~/components/Inputs/FileInputWithCropper'
 import { useFirebaseAuthContext } from '~/providers/FirebaseAuthProvider'
 import { Kareshi } from '~/entities/Kareshi'
+import { SubmitLoading } from '~/components/Base/SubmitLoading'
+import { useState } from 'react'
 
 type Props = {
   kareshi: Kareshi | null
 }
 
 export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
-  const { startLoading, stopLoading } = useLoadingContext()
+  const [progress, setProgress] = useState<number>(0)
   const { showErrorToast, showSuccessToast } = useToast()
-  const { createKareshi } = useSaveKareshi()
   const { uid } = useFirebaseAuthContext()
   const {
     register,
@@ -52,16 +52,18 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
     },
   })
 
+  const { createKareshi } = useSaveKareshi(progress, setProgress)
+  const isShowLoading = progress > 0 && progress < 100
+
   const submit = async (data: EditKareshiInputType) => {
     try {
-      startLoading()
       await createKareshi(data)
+      setProgress(100)
       showSuccessToast('彼氏を保存しました')
     } catch (e) {
       console.log('error', e)
+      setProgress(0)
       showErrorToast(errorMessage(e))
-    } finally {
-      stopLoading()
     }
   }
 
@@ -129,6 +131,7 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
           error={errors.kareshiName?.message}
         />
       </FlexBox>
+      {isShowLoading && <SubmitLoading value={progress} />}
       <FlexBox gap={16} align="stretch">
         <BasicButton
           type="submit"
