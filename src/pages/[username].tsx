@@ -18,6 +18,7 @@ const KareshiPage: NextPage<Props> = ({ kareshi }: Props) => {
     : 'うちの彼氏です。'
   const ogpImageUrl =
     kareshi.ogpImageUrl ?? `${process.env.NEXT_PUBLIC_APP_URL}/images/ogp.png`
+  const kareshiUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${kareshi.username}`
   return (
     <>
       <NextSeo
@@ -28,7 +29,7 @@ const KareshiPage: NextPage<Props> = ({ kareshi }: Props) => {
         openGraph={{
           title,
           description,
-          url: process.env.NEXT_PUBLIC_APP_URL,
+          url: kareshiUrl,
           type: 'website',
           images: [
             {
