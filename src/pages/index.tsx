@@ -18,9 +18,15 @@ const IndexPage = () => {
           property="canonical"
           content="https://www.xn--n8jnck8c3rya5127g0wxa.com/"
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="ja_JP" />
+        <meta
+          property="og:url"
+          content="https://www.xn--n8jnck8c3rya5127g0wxa.com/"
+        />
         <meta
           property="og:image"
-          content="https://www.xn--n8jnck8c3rya5127g0wxa.com/images/ogp.png"
+          content="https://www.xn--n8jnck8c3rya5127g0wxa.com/ogp.png"
         />
       </Head>
       {/* <NextSeo
