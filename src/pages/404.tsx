@@ -17,7 +17,7 @@ const Custom404: NextPage = () => {
           type: 'website',
           images: [
             {
-              url: `${process.env.NEXT_PUBLIC_APP_URL}/images/ogp.png`,
+              url: `${process.env.NEXT_PUBLIC_APP_URL}/ogp.png`,
               width: 800,
               height: 600,
               alt: '',

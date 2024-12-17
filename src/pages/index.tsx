@@ -5,7 +5,7 @@ const IndexPage = () => {
   const title = '彼氏がかわいすぎる.com'
   const description = 'うちの彼氏がかわいすぎる'
   const appUrl = process.env.NEXT_PUBLIC_APP_URL
-  const ogpImageUrl = `${appUrl}/images/ogp.png`
+  const ogpImageUrl = `${appUrl}/ogp.png`
   return (
     <>
       <NextSeo
