@@ -2,7 +2,13 @@
 import { TopContainer } from '~/features/top/components/TopContainer'
 import Head from 'next/head'
 
-const IndexPage = () => {
+const IndexPage = ({
+  title,
+  description,
+}: {
+  title: string
+  description: string
+}) => {
   return (
     <>
       <Head>
@@ -10,8 +16,8 @@ const IndexPage = () => {
           property="og:url"
           content="https://www.xn--n8jnck8c3rya5127g0wxa.com/"
         />
-        <meta property="og:title" content="彼氏がかわいすぎる.com" />
-        <meta property="og:description" content="うちの彼氏がかわいすぎる" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
         <meta property="og:site_name" content="彼氏がかわいすぎる.com" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="ja_JP" />
@@ -56,6 +62,15 @@ const IndexPage = () => {
       <TopContainer />
     </>
   )
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      title: '彼氏がかわいすぎる.com',
+      description: 'うちの彼氏がかわいすぎる',
+    },
+  }
 }
 
 export default IndexPage
