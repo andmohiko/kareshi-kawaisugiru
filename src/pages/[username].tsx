@@ -77,7 +77,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
       props: {
         kareshi,
       },
-      revalidate: 300, // 5分ごとにページを再生成
+      revalidate: 60,
     }
   } catch (e) {
     return {

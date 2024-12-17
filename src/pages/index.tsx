@@ -1,3 +1,4 @@
+import { GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
 import { TopContainer } from '~/features/top/components/TopContainer'
 
@@ -30,6 +31,13 @@ const IndexPage = () => {
       <TopContainer />
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+    revalidate: 60,
+  }
 }
 
 export default IndexPage
