@@ -4,10 +4,10 @@ import styles from './style.module.css'
 import { Kareshi } from '~/entities/Kareshi'
 import { FullScreenLayout } from '~/components/Layouts/FullScreenLayout'
 import Image from 'next/image'
-import { BasicButton } from '~/components/Buttons/BasicButton'
 import { FaXTwitter } from 'react-icons/fa6'
 import { IoLinkSharp } from 'react-icons/io5'
 import { CopyButton } from '~/components/Buttons/CopyButton'
+import { ShareButton } from '~/components/Buttons/ShareButton'
 
 type Props = {
   kareshi: Kareshi
@@ -16,6 +16,8 @@ type Props = {
 export const KareshiContainer = ({ kareshi }: Props): React.ReactNode => {
   const isUsePortrait = useMediaQuery('(max-width: 600px)')
   const isUseSquare = useMediaQuery('(max-width: 950px)')
+
+  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${kareshi.username}`
 
   const kareshiImageUrl = () => {
     // 画面が縦のときはなるべく縦の画像を使う
@@ -58,11 +60,15 @@ export const KareshiContainer = ({ kareshi }: Props): React.ReactNode => {
             className={styles.logo}
           />
           <div className={styles.actions}>
-            <BasicButton width="175px" leftSection={<FaXTwitter />}>
+            <ShareButton
+              shareUrl={shareUrl}
+              width="175px"
+              leftSection={<FaXTwitter />}
+            >
               ポストで共有
-            </BasicButton>
+            </ShareButton>
             <CopyButton
-              copyText={`${process.env.NEXT_PUBLIC_APP_URL}/${kareshi.username}`}
+              copyText={shareUrl}
               width="175px"
               leftSection={<IoLinkSharp />}
               importance="secondary"
