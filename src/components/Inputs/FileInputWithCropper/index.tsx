@@ -126,10 +126,9 @@ export const FileInputWithCropper = ({
                   ref={selectedImageRef}
                   alt=""
                   style={{
-                    height: '100%',
+                    height: 'auto',
                     maxHeight: '75vh',
-                    width: '100%',
-                    maxWidth: 1080,
+                    maxWidth: '100%',
                   }}
                 />
               </ReactCrop>

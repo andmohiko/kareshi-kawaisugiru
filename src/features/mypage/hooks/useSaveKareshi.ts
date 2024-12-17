@@ -33,7 +33,7 @@ export const useSaveKareshi = (
       if (progress >= 100) {
         clearInterval(interval)
       }
-    }, 65) // 最低でも6.5sはローディングを表示する
+    }, 75) // 最低でも7.5sはローディングを表示する
   }
 
   const createKareshi = async (data: EditKareshiInputType) => {

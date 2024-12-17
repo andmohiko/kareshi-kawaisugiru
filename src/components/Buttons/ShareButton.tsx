@@ -7,7 +7,7 @@ import { getButtonVariant, buttonColor } from '~/components/Buttons/types'
 const hashtags = ['彼氏がかわいすぎる', '彼氏がかわいすぎるどっとこむ']
 
 const createShareUrl = (url: string): string => {
-  const shareUrl = new URL('http://twitter.com/share')
+  const shareUrl = new URL('http://x.com/share')
   const urlParams = [
     ['url', url],
     ['hashtags', hashtags.join(',')],
@@ -16,6 +16,7 @@ const createShareUrl = (url: string): string => {
   shareUrl.search = params.toString()
   return shareUrl.toString()
 }
+
 type Props = {
   children: React.ReactNode
   shareUrl: string
