@@ -17,12 +17,17 @@
   "dependencies": {
     "@napi-rs/canvas": "^0.1.65",
     "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-promise-router": "^4.1.1",
+    "express-validator": "^7.2.0",
     "firebase-admin": "^12.1.0",
     "firebase-functions": "^5.0.0",
     "sharp": "^0.33.5",
     "uuid": "^11.0.3"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
     "@types/uuid": "^10.0.0",
     "typescript": "5.3"
   },

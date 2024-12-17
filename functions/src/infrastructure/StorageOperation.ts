@@ -29,5 +29,6 @@ export const saveBufferToStorageOperation = async (
   await fileRef.save(file.data, {
     contentType: file.type,
   })
-  return `https://storage.googleapis.com/${storageBucket.name}/${storagePath}/${file.fileName}`
+  await fileRef.makePublic()
+  return fileRef.publicUrl()
 }
