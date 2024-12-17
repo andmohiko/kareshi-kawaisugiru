@@ -17,5 +17,8 @@ export const BaseHead = () => (
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="msapplication-TileColor" content="#323232" />
     <meta name="theme-color" content="#ffffff" />
+
+    {/* OGP */}
+    <meta name="twitter:card" content="summary_large_image" />
   </Head>
 )
