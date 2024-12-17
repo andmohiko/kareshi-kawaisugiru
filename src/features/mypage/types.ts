@@ -6,13 +6,16 @@ const kareshiSchema = z.object({
     .string()
     .max(8, { message: '8文字以内にしてください' })
     .nullable(),
-  landscapeImageUrl: z.string().optional(),
+  landscapeImageUrl: z.string().min(1, { message: '画像を選択してください' }),
   portraitImageUrl: z.string().optional(),
   squareImageUrl: z.string().optional(),
   username: z
     .string()
     .min(4, { message: '4文字以上にしてください' })
     .max(30, { message: '30文字以内にしてください' })
+    .regex(/^[a-zA-Z0-9_]+$/, {
+      message: '使用できるのは英数字とアンダースコア(_)のみです',
+    })
     .nullable(),
 })
 
@@ -24,6 +27,7 @@ export const editKareshiSchema = (currentUsername: string | null) => {
   // usernameが入力済みのときはusernameの重複チェックを追加する
   return kareshiSchema.refine(
     async (data) => {
+      // usernameが未入力または自分が使用中のusernameのときは重複チェックを行わない
       if (!data || !data.username || data.username === currentUsername) {
         return true
       }

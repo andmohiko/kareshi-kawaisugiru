@@ -5,11 +5,21 @@
   justify-content: flex-start;
   width: 100%;
 
-  .title {
-    font-size: 14px;
-    line-height: 1;
-    color: #333;
-    margin-bottom: 8px;
+  .texts {
+    margin-bottom: 6px;
+
+    .title {
+      font-size: 14px;
+      line-height: 1;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .description {
+      font-size: 12px;
+      line-height: 1;
+      color: var(--color-description);
+    }
   }
 
   .dropzone {

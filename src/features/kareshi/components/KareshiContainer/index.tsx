@@ -4,6 +4,8 @@ import styles from './style.module.css'
 import { Kareshi } from '~/entities/Kareshi'
 import { FullScreenLayout } from '~/components/Layouts/FullScreenLayout'
 import Image from 'next/image'
+import { CopyButton } from '~/components/Buttons/CopyButton'
+import { ShareButton } from '~/components/Buttons/ShareButton'
 
 type Props = {
   kareshi: Kareshi
@@ -12,6 +14,8 @@ type Props = {
 export const KareshiContainer = ({ kareshi }: Props): React.ReactNode => {
   const isUsePortrait = useMediaQuery('(max-width: 600px)')
   const isUseSquare = useMediaQuery('(max-width: 950px)')
+
+  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${kareshi.username}`
 
   const kareshiImageUrl = () => {
     // 画面が縦のときはなるべく縦の画像を使う
@@ -53,6 +57,18 @@ export const KareshiContainer = ({ kareshi }: Props): React.ReactNode => {
             alt="彼氏がかわいすぎる.com"
             className={styles.logo}
           />
+          <div className={styles.actions}>
+            <ShareButton shareUrl={shareUrl} width="175px">
+              ポストで共有
+            </ShareButton>
+            <CopyButton
+              copyText={shareUrl}
+              width="175px"
+              importance="secondary"
+            >
+              リンクをコピー
+            </CopyButton>
+          </div>
         </div>
       </div>
     </FullScreenLayout>

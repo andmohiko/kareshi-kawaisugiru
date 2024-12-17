@@ -1,45 +1,44 @@
 # firestore 設計
 
-- [scenes](#scenes)
-- [tags](#tags)
+- [kareshis](#kareshis)
+- [users](#users)
 
-## scenes
+## kareshis
 
 ### 概要
 
 ```
-/scenes/{sceneId}
+/kareshis/{userId}
 ```
 
-- スクショ
-- ID: 自動生成 ID
+- 彼氏ページ一覧
+- ID: 作成ユーザーの Uid
 
 ### 詳細
 
 - createdAt: Timestamp 作成日時
-- likes: number いいね数
-- screenshotUrl: string カードの画像リンク
-- shares: number リンク共有された数
-- tags: string[] タグ
-- title: string タイトル
+- kareshiName: String 彼氏名
+- landscapeImageUrl: String? 横向きの画像 URL
+- ogpImageUrl: String? OGP 画像 URL
+- portraitImageUrl: String? 縦向きの画像 URl
+- squareImageUrl: String? 正方形の画像 URL
 - updatedAt: Timestamp 作成日時
-- userId: string | null 投稿したユーザー ID
-- videoName: string 動画名
+- username: String ユーザー名
 
-## tags
+## users
 
 ### 概要
 
 ```
-/tags/{tagId}
+/users/{userId}
 ```
 
-- タグ
-- ID: 自動生成 ID
+- ユーザー一覧
+- ID: Firebase Auth の Uid
 
 ### 詳細
 
 - createdAt: Timestamp 作成日時
-- label: string タグ名
-- scenesCount: number タグがつけられている画像の数
+- email: String メールアドレス
+- name: String? 名前
 - updatedAt: Timestamp 作成日時

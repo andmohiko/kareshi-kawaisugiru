@@ -14,14 +14,14 @@
   .footer {
     position: absolute;
     width: 100%;
-    height: 200px;
+    height: 220px;
     left: 0;
     bottom: 0;
     background: linear-gradient(180deg, rgba(34, 34, 34, 0) 0%, #222222 100%);
 
     .info {
       position: absolute;
-      bottom: 32px;
+      bottom: 100px;
       left: 32px;
       width: 800px;
 
@@ -43,13 +43,22 @@
 
     .logo {
       position: absolute;
-      bottom: 32px;
+      bottom: 100px;
       right: 32px;
       width: 360px;
 
       @media (max-width: 768px) {
         width: 132px;
       }
+    }
+
+    .actions {
+      position: absolute;
+      bottom: 32px;
+
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
     }
   }
 }

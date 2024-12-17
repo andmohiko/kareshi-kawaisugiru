@@ -20,6 +20,7 @@ type Props = {
   onChange: (file: FileObject | undefined) => void
   error: string | undefined
   label: React.ReactNode
+  description?: React.ReactNode
   storagePath: string
   ratioWidth?: number
   ratioHeight?: number
@@ -30,6 +31,7 @@ export const FileInputWithCropper = ({
   onChange,
   error,
   label,
+  description,
   storagePath,
   ratioWidth = 16,
   ratioHeight = 9,
@@ -62,7 +64,10 @@ export const FileInputWithCropper = ({
 
   return (
     <div ref={containerRef} className={styles.fileInputWithCropper}>
-      <p className={styles.title}>{label}</p>
+      <div className={styles.texts}>
+        <p className={styles.title}>{label}</p>
+        {description && <p className={styles.description}>{description}</p>}
+      </div>
       {file ? (
         <ImagePreview file={file} onRemove={remove} />
       ) : (
