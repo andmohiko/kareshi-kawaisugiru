@@ -1,4 +1,3 @@
-// import { NextSeo } from 'next-seo'
 import { TopContainer } from '~/features/top/components/TopContainer'
 import Head from 'next/head'
 
@@ -12,6 +11,7 @@ const IndexPage = ({
   return (
     <>
       <Head>
+        {/* OGPタグ */}
         <meta
           property="og:url"
           content="https://www.xn--n8jnck8c3rya5127g0wxa.com/"
@@ -25,6 +25,7 @@ const IndexPage = ({
           property="og:image"
           content="https://www.xn--n8jnck8c3rya5127g0wxa.com/ogp.png"
         />
+        {/* Twitterカード用 */}
         <meta
           property="twitter:image"
           content="https://www.xn--n8jnck8c3rya5127g0wxa.com/ogp.png"
@@ -36,29 +37,6 @@ const IndexPage = ({
           content="うちの彼氏がかわいすぎる"
         />
       </Head>
-      {/* <NextSeo
-        title="彼氏がかわいすぎる.com"
-        description="うちの彼氏がかわいすぎる"
-        nofollow={false}
-        canonical={process.env.NEXT_PUBLIC_APP_URL}
-        openGraph={{
-          title: '彼氏がかわいすぎる.com',
-          description: 'うちの彼氏がかわいすぎる',
-          url: process.env.NEXT_PUBLIC_APP_URL,
-          type: 'website',
-          images: [
-            {
-              url: `${process.env.NEXT_PUBLIC_APP_URL}/images/ogp.png`,
-              width: 800,
-              height: 600,
-              alt: '',
-            },
-          ],
-        }}
-        twitter={{
-          cardType: 'summary_large_image',
-        }}
-      /> */}
       <TopContainer />
     </>
   )
