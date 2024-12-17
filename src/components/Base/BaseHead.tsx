@@ -8,6 +8,7 @@ export const BaseHead = () => (
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1"
     />
+    <link rel="canonical" href="https://www.xn--n8jnck8c3rya5127g0wxa.com/" />
 
     {/* favicon */}
     <link rel="icon" href="/favicon.ico" />
