@@ -28,6 +28,16 @@ const IndexPage = () => {
           property="og:image"
           content="https://www.xn--n8jnck8c3rya5127g0wxa.com/ogp.png"
         />
+        <meta
+          property="twitter:image"
+          content="https://www.xn--n8jnck8c3rya5127g0wxa.com/ogp.png"
+        />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content="彼氏がかわいすぎる.com" />
+        <meta
+          property="twitter:description"
+          content="うちの彼氏がかわいすぎる"
+        />
       </Head>
       {/* <NextSeo
         title="彼氏がかわいすぎる.com"
