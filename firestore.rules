@@ -42,7 +42,7 @@ service cloud.firestore {
     }
 
     match /kareshis/{kareshiId} {
-      allow read: if isSignedIn();
+      allow read;
       allow create: if isSignedIn() && isUser(kareshiId) && isValidKareshiSchema(requestData());
       allow update: if isSignedIn() && isUser(kareshiId) && isValidKareshiSchema(requestData());
       allow delete: if isSignedIn() && isUser(kareshiId);
