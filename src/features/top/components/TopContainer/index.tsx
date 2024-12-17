@@ -18,6 +18,7 @@ export const TopContainer = (): React.ReactNode => {
           <BasicButton href="/i/mypage">彼氏のページを作る</BasicButton>
         </div>
       </div>
+      //{' '}
     </BaseLayout>
   )
 }

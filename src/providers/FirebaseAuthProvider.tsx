@@ -54,9 +54,9 @@ export const FirebaseAuthProvider = ({ children }: { children: ReactNode }) => {
     push('/')
   }
 
-  if (uid === undefined) {
-    return <LoadingOverlay />
-  }
+  // if (uid === undefined) {
+  //   return <LoadingOverlay />
+  // }
 
   return (
     <FirebaseAuthContext.Provider value={{ uid, currentUser, logout }}>

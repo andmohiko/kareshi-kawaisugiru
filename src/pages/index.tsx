@@ -1,42 +1,36 @@
+import { NextSeo } from 'next-seo'
 import { TopContainer } from '~/features/top/components/TopContainer'
-import Head from 'next/head'
 
-const IndexPage = ({
-  title,
-  description,
-}: {
-  title: string
-  description: string
-}) => {
+const IndexPage = () => {
+  const title = '彼氏がかわいすぎる.com'
+  const description = 'うちの彼氏がかわいすぎる'
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL
+  const ogpImageUrl = `${appUrl}/images/ogp.png`
   return (
     <>
-      <Head>
-        {/* OGPタグ */}
-        <meta
-          property="og:url"
-          content="https://www.xn--n8jnck8c3rya5127g0wxa.com/"
-        />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:site_name" content="彼氏がかわいすぎる.com" />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content="ja_JP" />
-        <meta
-          property="og:image"
-          content="https://www.xn--n8jnck8c3rya5127g0wxa.com/ogp.png"
-        />
-        {/* Twitterカード用 */}
-        <meta
-          property="twitter:image"
-          content="https://www.xn--n8jnck8c3rya5127g0wxa.com/ogp.png"
-        />
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:title" content="彼氏がかわいすぎる.com" />
-        <meta
-          property="twitter:description"
-          content="うちの彼氏がかわいすぎる"
-        />
-      </Head>
+      <NextSeo
+        title={title}
+        description={description}
+        nofollow={false}
+        canonical={process.env.NEXT_PUBLIC_APP_URL}
+        openGraph={{
+          title,
+          description,
+          url: appUrl,
+          type: 'website',
+          images: [
+            {
+              url: ogpImageUrl,
+              width: 1200,
+              height: 630,
+              alt: '',
+            },
+          ],
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+        }}
+      />
       <TopContainer />
     </>
   )
@@ -44,10 +38,7 @@ const IndexPage = ({
 
 export async function getStaticProps() {
   return {
-    props: {
-      title: '彼氏がかわいすぎる.com',
-      description: 'うちの彼氏がかわいすぎる',
-    },
+    props: {},
   }
 }
 
