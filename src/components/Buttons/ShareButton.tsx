@@ -1,4 +1,5 @@
 import { Button } from '@mantine/core'
+import { FaXTwitter } from 'react-icons/fa6'
 
 import type { ButtonImportance, ButtonSize } from '~/components/Buttons/types'
 import { getButtonVariant, buttonColor } from '~/components/Buttons/types'
@@ -10,7 +11,6 @@ type Props = {
   shareUrl: string
   importance?: ButtonImportance
   size?: ButtonSize
-  leftSection?: React.ReactNode
   disabled?: boolean
   width?: string
   fullWidth?: boolean
@@ -21,7 +21,6 @@ export const ShareButton = ({
   shareUrl,
   importance = 'primary',
   size = 'md',
-  leftSection,
   disabled = false,
   width,
   fullWidth = false,
@@ -49,7 +48,7 @@ export const ShareButton = ({
       w={width}
       fullWidth={fullWidth}
       size={size}
-      leftSection={leftSection}
+      leftSection={<FaXTwitter />}
     >
       {children}
     </Button>

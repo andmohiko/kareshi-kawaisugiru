@@ -4,8 +4,6 @@ import styles from './style.module.css'
 import { Kareshi } from '~/entities/Kareshi'
 import { FullScreenLayout } from '~/components/Layouts/FullScreenLayout'
 import Image from 'next/image'
-import { FaXTwitter } from 'react-icons/fa6'
-import { IoLinkSharp } from 'react-icons/io5'
 import { CopyButton } from '~/components/Buttons/CopyButton'
 import { ShareButton } from '~/components/Buttons/ShareButton'
 
@@ -60,17 +58,12 @@ export const KareshiContainer = ({ kareshi }: Props): React.ReactNode => {
             className={styles.logo}
           />
           <div className={styles.actions}>
-            <ShareButton
-              shareUrl={shareUrl}
-              width="175px"
-              leftSection={<FaXTwitter />}
-            >
+            <ShareButton shareUrl={shareUrl} width="175px">
               ポストで共有
             </ShareButton>
             <CopyButton
               copyText={shareUrl}
               width="175px"
-              leftSection={<IoLinkSharp />}
               importance="secondary"
             >
               リンクをコピー

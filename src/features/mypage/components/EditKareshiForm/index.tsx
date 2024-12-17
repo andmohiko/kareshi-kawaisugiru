@@ -71,7 +71,8 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
         {/* TODO: ユニーク制約を入れる */}
         {/* TODO: 文字の種類の制約を入れる */}
         <TextInput
-          label="彼氏ID(URLに使われるよ)"
+          label="彼氏ID"
+          description="URLに使われるよ"
           w="100%"
           {...register('username')}
           error={errors.username?.message}
@@ -82,6 +83,7 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
           render={({ field }) => (
             <FileInputWithCropper
               label="彼氏の写真（横）"
+              description="SNSでシェアしたときに使われるよ"
               value={field.value}
               onChange={field.onChange}
               error={errors.landscapeImageUrl?.message}
@@ -97,6 +99,7 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
           render={({ field }) => (
             <FileInputWithCropper
               label="彼氏の写真（縦）"
+              description="彼氏のページを開いたときに使われるよ"
               value={field.value}
               onChange={field.onChange}
               error={errors.portraitImageUrl?.message}

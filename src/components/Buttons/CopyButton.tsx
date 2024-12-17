@@ -1,4 +1,5 @@
 import { Button, CopyButton as MantineCopyButton } from '@mantine/core'
+import { IoLinkSharp } from 'react-icons/io5'
 
 import type { ButtonImportance, ButtonSize } from '~/components/Buttons/types'
 import { getButtonVariant, buttonColor } from '~/components/Buttons/types'
@@ -8,7 +9,6 @@ type Props = {
   copyText: string
   importance?: ButtonImportance
   size?: ButtonSize
-  leftSection?: React.ReactNode
   disabled?: boolean
   width?: string
   fullWidth?: boolean
@@ -19,7 +19,6 @@ export const CopyButton = ({
   copyText,
   importance = 'primary',
   size = 'md',
-  leftSection,
   disabled = false,
   width,
   fullWidth = false,
@@ -40,7 +39,7 @@ export const CopyButton = ({
           w={width}
           fullWidth={fullWidth}
           size={size}
-          leftSection={leftSection}
+          leftSection={<IoLinkSharp />}
           style={{
             backgroundColor: copied ? undefined : 'var(--color-bg-white)',
           }}
