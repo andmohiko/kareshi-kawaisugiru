@@ -7,18 +7,24 @@ import { fetchOgpImageUrlOperation } from '~/infrastructures/api/fetchOgpImageUr
 export const useSaveKareshi = (): {
   createKareshi: (data: EditKareshiInputType) => void
 } => {
-  const { uid } = useFirebaseAuthContext()
+  const { uid, currentUser } = useFirebaseAuthContext()
 
   const createKareshi = async (data: EditKareshiInputType) => {
-    if (!uid) {
+    if (!uid || !currentUser) {
       throw new Error('再度ログインしてください')
     }
 
-    const ogpImageUrl = await fetchOgpImageUrlOperation(
-      data.landscapeImageUrl,
-      data.kareshiName,
-      uid,
-    )
+    let ogpImageUrl = ''
+    try {
+      ogpImageUrl = await fetchOgpImageUrlOperation(
+        currentUser,
+        data.landscapeImageUrl,
+        data.kareshiName,
+        uid,
+      )
+    } catch (e) {
+      throw new Error('彼氏画像の作成に失敗しました')
+    }
 
     await createKareshiOperation(uid, {
       createdAt: serverTimestamp,

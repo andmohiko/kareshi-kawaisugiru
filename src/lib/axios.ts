@@ -9,9 +9,9 @@ export const axiosBase = axios.create({
  * userTokenをセットする
  * @param token
  */
-const setBearer = async (currentUser: User) => {
+export const setBearer = async (currentUser: User) => {
   const token = await currentUser.getIdToken()
-  axiosBase.defaults.headers.common.authorization = `Bearer ${token}`
+  axiosBase.defaults.headers.authorization = `Bearer ${token}`
 }
 
 const post = async <T>(

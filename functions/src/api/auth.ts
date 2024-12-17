@@ -10,7 +10,7 @@ exports.handle = async (
   try {
     const authHeader = req.headers['authorization']
     if (!authHeader) {
-      return next()
+      return res.status(401).send({ error: 'Authorization header not found' })
     }
     const token = (
       typeof authHeader === 'string' ? authHeader : authHeader[0]
@@ -21,7 +21,7 @@ exports.handle = async (
     }
     const decodedToken = await auth.verifyIdToken(token)
     // decodedTokenが無効ならunauthorizedを返す
-    if (!decodedToken) {
+    if (!decodedToken || !decodedToken.uid) {
       return res.status(401).send({ error: 'Invalid token' })
     }
     req.currentUser = decodedToken
