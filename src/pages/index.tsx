@@ -18,6 +18,7 @@ const IndexPage = () => {
           description,
           url: appUrl,
           type: 'website',
+          siteName: title,
           images: [
             {
               url: ogpImageUrl,

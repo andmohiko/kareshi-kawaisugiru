@@ -54,6 +54,7 @@ export const FirebaseAuthProvider = ({ children }: { children: ReactNode }) => {
     push('/')
   }
 
+  // ログインが必要なページでだけuidの存在確認をする
   // if (uid === undefined) {
   //   return <LoadingOverlay />
   // }
