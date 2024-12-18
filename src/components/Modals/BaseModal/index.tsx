@@ -25,7 +25,6 @@ export const BaseModal = ({
         blur: 2,
         opacity: 0.9,
       }}
-      yOffset={300}
       classNames={{
         header: styles.mantineModalHeader,
       }}
