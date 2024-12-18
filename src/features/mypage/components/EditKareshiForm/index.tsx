@@ -21,11 +21,15 @@ import { useState } from 'react'
 
 type Props = {
   kareshi: Kareshi | null
+  onSave: () => void
 }
 
-export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
+export const EditKareshiForm = ({
+  kareshi,
+  onSave,
+}: Props): React.ReactNode => {
   const [progress, setProgress] = useState<number>(0)
-  const { showErrorToast, showSuccessToast } = useToast()
+  const { showErrorToast } = useToast()
   const { uid } = useFirebaseAuthContext()
   const {
     register,
@@ -59,7 +63,7 @@ export const EditKareshiForm = ({ kareshi }: Props): React.ReactNode => {
     try {
       await createKareshi(data)
       setProgress(100)
-      showSuccessToast('彼氏を保存しました')
+      onSave()
     } catch (e) {
       console.log('error', e)
       setProgress(0)
