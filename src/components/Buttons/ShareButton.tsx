@@ -9,7 +9,7 @@ const hashtags = ['彼氏がかわいすぎる', '彼氏がかわいすぎるど
 const createShareUrl = (url: string): string => {
   const shareUrl = new URL('http://x.com/share')
   const urlParams = [
-    ['url', encodeURIComponent(url)],
+    ['url', url],
     ['hashtags', hashtags.join(',')],
   ]
   const params = new URLSearchParams(urlParams)
