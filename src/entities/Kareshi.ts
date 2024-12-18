@@ -30,3 +30,10 @@ export type CreateKareshiDto = Omit<
   createdAt: FieldValue
   updatedAt: FieldValue
 }
+
+export type UpdateKareshiDto = Omit<
+  Kareshi,
+  'kareshiId' | 'createdAt' | 'updatedAt'
+> & {
+  updatedAt: FieldValue
+}

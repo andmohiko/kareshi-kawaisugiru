@@ -1,4 +1,7 @@
-import { createKareshiOperation } from '~/infrastructures/firestore/KareshiOperations'
+import {
+  createKareshiOperation,
+  updateKareshiOperation,
+} from '~/infrastructures/firestore/KareshiOperations'
 import { serverTimestamp } from '~/lib/firebase'
 import { useFirebaseAuthContext } from '~/providers/FirebaseAuthProvider'
 import { EditKareshiInputType } from '~/features/mypage/types'
@@ -10,6 +13,7 @@ export const useSaveKareshi = (
   setProgress: (progress: number) => void,
 ): {
   createKareshi: (data: EditKareshiInputType) => void
+  updateKareshi: (data: EditKareshiInputType) => void
   progress: number
 } => {
   const { uid, currentUser } = useFirebaseAuthContext()
@@ -67,5 +71,35 @@ export const useSaveKareshi = (
     }
   }
 
-  return { createKareshi, progress }
+  const updateKareshi = async (data: EditKareshiInputType) => {
+    if (!uid || !currentUser) {
+      throw new Error('再度ログインしてください')
+    }
+    startLoadingAnimation()
+
+    try {
+      const ogpImageUrl = await fetchOgpImageUrlOperation(
+        currentUser,
+        data.landscapeImageUrl,
+        data.kareshiName,
+        uid,
+      )
+
+      await updateKareshiOperation(uid, {
+        kareshiName: data.kareshiName,
+        landscapeImageUrl: data.landscapeImageUrl
+          ? data.landscapeImageUrl
+          : null,
+        ogpImageUrl,
+        portraitImageUrl: data.portraitImageUrl ? data.portraitImageUrl : null,
+        squareImageUrl: data.squareImageUrl ? data.squareImageUrl : null,
+        updatedAt: serverTimestamp,
+        username: data.username,
+      })
+    } catch (e) {
+      throw new Error('彼氏ページの作成に失敗しました')
+    }
+  }
+
+  return { createKareshi, updateKareshi, progress }
 }

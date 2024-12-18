@@ -56,12 +56,16 @@ export const EditKareshiForm = ({
     },
   })
 
-  const { createKareshi } = useSaveKareshi(progress, setProgress)
+  const { createKareshi, updateKareshi } = useSaveKareshi(progress, setProgress)
   const isShowLoading = progress > 0 && progress < 100
 
   const submit = async (data: EditKareshiInputType) => {
     try {
-      await createKareshi(data)
+      if (kareshi) {
+        await updateKareshi(data)
+      } else {
+        await createKareshi(data)
+      }
       setProgress(100)
       onSave()
     } catch (e) {

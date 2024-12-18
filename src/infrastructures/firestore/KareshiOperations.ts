@@ -1,13 +1,13 @@
 import {
   collection,
   doc,
-  getDoc,
   getDocs,
   limit,
   onSnapshot,
   query,
   setDoc,
   Unsubscribe,
+  updateDoc,
   where,
 } from 'firebase/firestore'
 import {
@@ -16,6 +16,7 @@ import {
   Kareshi,
   kareshiCollection,
   KareshiId,
+  UpdateKareshiDto,
 } from '~/entities/Kareshi'
 import { db } from '~/lib/firebase'
 import { convertDate } from '~/utils/convertDate'
@@ -50,6 +51,13 @@ export const createKareshiOperation = async (
   dto: CreateKareshiDto,
 ) => {
   await setDoc(doc(db, kareshiCollection, kareshiId), dto)
+}
+
+export const updateKareshiOperation = async (
+  kareshiId: KareshiId,
+  dto: UpdateKareshiDto,
+) => {
+  await updateDoc(doc(db, kareshiCollection, kareshiId), dto)
 }
 
 export const isExistKareshiByUsernameOperation = async (
