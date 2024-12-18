@@ -34,8 +34,8 @@ const KareshiPage: NextPage<Props> = ({ kareshi }: Props) => {
           images: [
             {
               url: ogpImageUrl,
-              width: 800,
-              height: 600,
+              width: 1200,
+              height: 630,
               alt: '',
             },
           ],
