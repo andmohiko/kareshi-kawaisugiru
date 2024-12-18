@@ -22,8 +22,8 @@ const IndexPage = () => {
           images: [
             {
               url: ogpImageUrl,
-              width: 1200,
-              height: 630,
+              width: 800,
+              height: 600,
               alt: '',
             },
           ],
