@@ -32,6 +32,11 @@ export const FirebaseAuthProvider = ({ children }: { children: ReactNode }) => {
       setCurrentUser(null)
       // ログイン不要なページではなにもしない
       if (!authPaths.includes(pathname)) {
+        // ログイン済みならユーザー情報を保持
+        if (user) {
+          setUid(user.uid)
+          setCurrentUser(user)
+        }
         return
       }
 

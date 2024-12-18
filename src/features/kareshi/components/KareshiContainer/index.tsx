@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { CopyButton, CopyIconButton } from '~/components/Buttons/CopyButton'
 import { ShareButton, ShareIconButton } from '~/components/Buttons/ShareButton'
 import { BasicButton } from '~/components/Buttons/BasicButton'
+import { useFirebaseAuthContext } from '~/providers/FirebaseAuthProvider'
 
 type Props = {
   kareshi: Kareshi
@@ -16,6 +17,8 @@ export const KareshiContainer = ({ kareshi }: Props): React.ReactNode => {
   const isUsePortrait = useMediaQuery('(max-width: 600px)')
   const isUseSquare = useMediaQuery('(max-width: 950px)')
   const isCompactShareButtons = useMediaQuery('(max-width: 768px)')
+  const { uid } = useFirebaseAuthContext()
+  const isMyKareshi = kareshi.kareshiId === uid
 
   const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${kareshi.username}`
 
@@ -81,7 +84,9 @@ export const KareshiContainer = ({ kareshi }: Props): React.ReactNode => {
                 </>
               )}
             </div>
-            <BasicButton href="/i/mypage">彼氏のページを作る</BasicButton>
+            <BasicButton href="/i/mypage">
+              {isMyKareshi ? '彼氏を編集する' : '彼氏のページを作る'}
+            </BasicButton>
           </div>
         </div>
       </div>
